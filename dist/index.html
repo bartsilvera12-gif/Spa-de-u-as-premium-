@@ -204,9 +204,13 @@ document.addEventListener('DOMContentLoaded', async function() {
         var t = document.getElementById('galeria-carrusel');
         if (!t || t.children.length === 0 || t.dataset.setup) return;
         t.dataset.setup = '1';
-        // Duplicate children for seamless infinite loop
+        // Duplicate children for seamless infinite loop; copy onclick handler (property, not attribute)
         var kids = Array.prototype.slice.call(t.children);
-        kids.forEach(function (c) { t.appendChild(c.cloneNode(true)); });
+        kids.forEach(function (c) {
+          var clone = c.cloneNode(true);
+          if (c.onclick) clone.onclick = c.onclick;
+          t.appendChild(clone);
+        });
         // Wrap the track in a viewport for overflow clipping
         if (!t.parentNode.classList.contains('gal-viewport')) {
           var wrap = document.createElement('div');
