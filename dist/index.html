@@ -27,13 +27,11 @@
         grid-template-columns: 1fr !important;
       }
     }
-    #galeria-carrusel { width: 100%; will-change: transform; animation: scroll-gal 35s linear infinite; align-items: stretch; }
-    #galeria-carrusel:hover { animation-play-state: paused; }
+    #galeria-carrusel { width: 100%; overflow-x: auto; scrollbar-width: none; align-items: stretch; scroll-behavior: auto; }
+    #galeria-carrusel::-webkit-scrollbar { display: none; }
     #galeria-carrusel > div { flex: 0 0 240px !important; width: 240px !important; height: 240px !important; aspect-ratio: auto !important; opacity: 1 !important; transform: none !important; }
-    @keyframes scroll-gal { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 8px)); } }
     @media (max-width: 720px) {
       #galeria-carrusel > div { flex: 0 0 180px !important; width: 180px !important; height: 180px !important; }
-      #galeria-carrusel { animation-duration: 28s; }
     }
     body { background: #faf9f5; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
     #__bundler_loading { position: fixed; bottom: 20px; right: 20px; font: 13px/1.4 -apple-system, BlinkMacSystemFont, sans-serif; color: #666; background: #fff; padding: 8px 14px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.12); z-index: 10000; }
@@ -202,21 +200,27 @@ document.addEventListener('DOMContentLoaded', async function() {
   </script>
   <script>
     (function () {
-      function init() {
+      var started = false;
+      var findTimer = setInterval(function () {
         var t = document.getElementById('galeria-carrusel');
-        if (!t || t.dataset.cloned) return;
-        var kids = Array.from(t.children);
-        if (kids.length === 0) return;
-        kids.forEach(function (c) { t.appendChild(c.cloneNode(true)); });
-        t.dataset.cloned = '1';
-      }
-      var tries = 0;
-      var timer = setInterval(function () {
-        init();
-        tries++;
-        var t = document.getElementById('galeria-carrusel');
-        if ((t && t.dataset.cloned) || tries > 40) clearInterval(timer);
-      }, 250);
+        if (!t || t.children.length === 0 || started) return;
+        started = true;
+        clearInterval(findTimer);
+        var paused = false;
+        t.addEventListener('mouseenter', function () { paused = true; });
+        t.addEventListener('mouseleave', function () { paused = false; });
+        t.addEventListener('touchstart', function () { paused = true; }, { passive: true });
+        t.addEventListener('touchend', function () { setTimeout(function () { paused = false; }, 1500); }, { passive: true });
+        setInterval(function () {
+          if (paused) return;
+          if (t.scrollLeft + t.clientWidth >= t.scrollWidth - 1) {
+            t.scrollLeft = 0;
+          } else {
+            t.scrollLeft += 1;
+          }
+        }, 25);
+      }, 200);
+      setTimeout(function () { clearInterval(findTimer); }, 15000);
     })();
   </script>
 </body>
