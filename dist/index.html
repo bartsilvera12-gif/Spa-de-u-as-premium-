@@ -27,12 +27,12 @@
         grid-template-columns: 1fr !important;
       }
     }
-    #galeria-carrusel { width: 100%; will-change: transform; animation: scroll-gal 35s linear infinite; }
+    #galeria-carrusel { width: 100%; will-change: transform; animation: scroll-gal 35s linear infinite; align-items: stretch; }
     #galeria-carrusel:hover { animation-play-state: paused; }
-    #galeria-carrusel > div { flex: 0 0 240px !important; width: 240px !important; }
+    #galeria-carrusel > div { flex: 0 0 240px !important; width: 240px !important; height: 240px !important; aspect-ratio: auto !important; opacity: 1 !important; transform: none !important; }
     @keyframes scroll-gal { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 8px)); } }
     @media (max-width: 720px) {
-      #galeria-carrusel > div { flex: 0 0 180px !important; width: 180px !important; }
+      #galeria-carrusel > div { flex: 0 0 180px !important; width: 180px !important; height: 180px !important; }
       #galeria-carrusel { animation-duration: 28s; }
     }
     body { background: #faf9f5; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
