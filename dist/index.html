@@ -200,25 +200,6 @@ document.addEventListener('DOMContentLoaded', async function() {
           t.parentNode.insertBefore(wrap, t);
           wrap.appendChild(t);
         }
-        // Arrow buttons (nudge the CSS animation via animation-delay tricks)
-        var prevBtn = document.createElement('button');
-        prevBtn.className = 'gal-arrow prev';
-        prevBtn.setAttribute('aria-label', 'Anterior');
-        prevBtn.innerHTML = '&#10094;';
-        var nextBtn = document.createElement('button');
-        nextBtn.className = 'gal-arrow next';
-        nextBtn.setAttribute('aria-label', 'Siguiente');
-        nextBtn.innerHTML = '&#10095;';
-        wrap.appendChild(prevBtn);
-        wrap.appendChild(nextBtn);
-        // Arrows shift the animation-delay so the marquee jumps forward/back by one item.
-        var itemStep = 3.5; // seconds per item (approx; 35s / 10 items)
-        function nudge(deltaSec) {
-          var cur = parseFloat(t.style.animationDelay || 0);
-          t.style.animationDelay = (cur - deltaSec) + 's';
-        }
-        prevBtn.addEventListener('click', function (e) { e.stopPropagation(); nudge(-itemStep); });
-        nextBtn.addEventListener('click', function (e) { e.stopPropagation(); nudge(itemStep); });
       }, 200);
       setTimeout(function () { clearInterval(findTimer); }, 15000);
     })();
