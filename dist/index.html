@@ -202,15 +202,35 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (!t || t.children.length === 0 || t.dataset.setup) return;
         if (galleryImages === null) return; // wait until fetch completes (or fails)
         t.dataset.setup = '1';
-        // Replace originals' background with random /galeria images if available
+        // Reusable lightbox that shows the ACTUAL bg image at click time
+        function openZoom(bg) {
+          var ov = document.getElementById('cat-zoom');
+          if (!ov) {
+            ov = document.createElement('div');
+            ov.id = 'cat-zoom';
+            ov.style.cssText = 'position:fixed;inset:0;z-index:200;background:rgba(74,50,54,0.72);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out;';
+            var inn = document.createElement('div');
+            inn.id = 'cat-zoom-inner';
+            inn.style.cssText = 'width:min(560px,92vw);aspect-ratio:1;border-radius:28px;background-size:cover;background-position:center;background-repeat:no-repeat;box-shadow:0 30px 80px rgba(0,0,0,0.4);';
+            ov.appendChild(inn);
+            ov.addEventListener('click', function () { ov.style.display = 'none'; });
+            document.body.appendChild(ov);
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') ov.style.display = 'none'; });
+          }
+          ov.querySelector('#cat-zoom-inner').style.background = bg;
+          ov.style.display = 'flex';
+        }
+        // Replace originals' background with random /galeria images and override onclick
         var originals = Array.prototype.slice.call(t.children);
         if (galleryImages.length > 0) {
           originals.forEach(function (c, i) {
             var url = galleryImages[i % galleryImages.length];
-            c.style.background = "url('" + url + "') center/cover no-repeat";
+            var bg = "url('" + url + "') center/cover no-repeat";
+            c.style.background = bg;
+            c.onclick = function (e) { e.stopPropagation(); openZoom(bg); };
           });
         }
-        // Duplicate children for seamless infinite loop; copy onclick handler
+        // Duplicate children for seamless infinite loop; onclick property copied manually
         originals.forEach(function (c) {
           var clone = c.cloneNode(true);
           if (c.onclick) clone.onclick = c.onclick;
