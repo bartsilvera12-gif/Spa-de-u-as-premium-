@@ -181,18 +181,42 @@ document.addEventListener('DOMContentLoaded', async function() {
   </script>
   <script>
     (function () {
+      // Fetch /galeria and extract all photo URLs, shuffle, use first N in the carousel
+      var galleryImages = null;
+      fetch('galeria.html', { cache: 'no-store' }).then(function (r) { return r.text(); }).then(function (html) {
+        var re = /url\(['"]?(galeria\/[^'")\s]+)['"]?\)/g;
+        var found = [], seen = {}, m;
+        while ((m = re.exec(html)) !== null) {
+          if (!seen[m[1]]) { seen[m[1]] = 1; found.push(m[1]); }
+        }
+        // Fisher-Yates shuffle
+        for (var i = found.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = found[i]; found[i] = found[j]; found[j] = tmp;
+        }
+        galleryImages = found;
+      }).catch(function () { galleryImages = []; });
+
       var findTimer = setInterval(function () {
         var t = document.getElementById('galeria-carrusel');
         if (!t || t.children.length === 0 || t.dataset.setup) return;
+        if (galleryImages === null) return; // wait until fetch completes (or fails)
         t.dataset.setup = '1';
-        // Duplicate children for seamless infinite loop; copy onclick handler (property, not attribute)
+        // Replace originals' background with random /galeria images if available
         var originals = Array.prototype.slice.call(t.children);
+        if (galleryImages.length > 0) {
+          originals.forEach(function (c, i) {
+            var url = galleryImages[i % galleryImages.length];
+            c.style.background = "url('" + url + "') center/cover no-repeat";
+          });
+        }
+        // Duplicate children for seamless infinite loop; copy onclick handler
         originals.forEach(function (c) {
           var clone = c.cloneNode(true);
           if (c.onclick) clone.onclick = c.onclick;
           t.appendChild(clone);
         });
-        // Wrap the track in a viewport for overflow clipping + arrow buttons
+        // Wrap the track in a viewport for overflow clipping
         var wrap = t.parentNode;
         if (!wrap.classList.contains('gal-viewport')) {
           wrap = document.createElement('div');
