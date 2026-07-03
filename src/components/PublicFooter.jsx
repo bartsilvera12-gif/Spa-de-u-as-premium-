@@ -39,7 +39,11 @@ export default function PublicFooter() {
         </div>
       </div>
       <div className="pub-footer__bottom">
-        © {new Date().getFullYear()} Spa de Uñas Premium. Todos los derechos reservados.
+        <span>© {new Date().getFullYear()} Spa de Uñas Premium. Todos los derechos reservados.</span>
+        <span className="pub-footer__bottom-sep">·</span>
+        <Link to="/politicadeprivacidad">Política de privacidad</Link>
+        <span className="pub-footer__bottom-sep">·</span>
+        <span>Desarrollado por <a href="https://neura.com.py" target="_blank" rel="noopener"><strong>NEURA</strong></a></span>
       </div>
     </footer>
   )
