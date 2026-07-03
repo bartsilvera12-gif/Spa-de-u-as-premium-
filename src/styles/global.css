@@ -378,11 +378,34 @@ a:hover { opacity: .8; }
   grid-template-columns: 1.4fr 1fr 1fr;
 }
 @media (max-width: 720px) { .pub-footer__inner { grid-template-columns: 1fr; } }
-.pub-footer h4 { color: white; font-family: var(--font-title); margin-bottom: 16px; }
-.pub-footer a { color: var(--petal); display: block; padding: 4px 0; }
+.pub-footer__col { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.pub-footer h4 { color: white; font-family: var(--font-title); font-size: 1.15rem; margin-bottom: 8px; }
+.pub-footer a {
+  color: var(--petal); display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 0; text-decoration: none; opacity: .9;
+  transition: opacity .2s, color .2s;
+}
+.pub-footer a:hover { opacity: 1; color: white; }
+.pub-footer__brand {
+  display: flex; align-items: center; gap: 12px;
+  color: white; font-family: var(--font-title); font-size: 1.35rem;
+  margin-bottom: 10px;
+}
+.pub-footer__logo {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--rose-deep); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-title); font-size: 1.2rem; font-weight: 500;
+}
+.pub-footer__desc { color: var(--petal); opacity: .8; font-size: .92rem; line-height: 1.6; }
+.pub-footer__loc {
+  color: var(--petal); opacity: .85; font-size: .9rem;
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 6px;
+}
 .pub-footer__bottom {
   border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; padding-top: 20px;
   text-align: center; font-size: .85rem; opacity: .7;
+  max-width: 1200px; margin-left: auto; margin-right: auto;
 }
 
 /* ==== Estados ==== */
