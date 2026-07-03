@@ -256,6 +256,15 @@ a:hover { opacity: .8; }
   background-size: cover; background-position: center;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
+  transition: transform .35s ease, box-shadow .35s ease;
+  cursor: pointer; position: relative;
+}
+.carrusel__item:hover,
+.carrusel__item:active,
+.carrusel__item:focus-visible {
+  transform: scale(1.15);
+  box-shadow: var(--shadow-lg);
+  z-index: 5;
 }
 @media (max-width: 720px) {
   .carrusel__item { flex-basis: 190px; height: 190px; }
