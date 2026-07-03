@@ -10,9 +10,12 @@ import AdminDashboard from './pages/admin/AdminDashboard.jsx'
 import AdminCategorias from './pages/admin/AdminCategorias.jsx'
 import AdminServicios from './pages/admin/AdminServicios.jsx'
 import ProtectedAdminRoute from './routes/ProtectedAdminRoute.jsx'
+import ScrollToTop from './routes/ScrollToTop.jsx'
 
 export default function App() {
   return (
+    <>
+    <ScrollToTop />
     <Routes>
       {/* Público */}
       <Route path="/" element={<Home />} />
@@ -38,5 +41,6 @@ export default function App() {
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    </>
   )
 }
