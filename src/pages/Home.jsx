@@ -194,13 +194,11 @@ export default function Home() {
             <div className="cat-grid">
               {promos.map((s) => <PromoCard key={s.id} servicio={s} />)}
             </div>
-            {totalPromos > promos.length && (
-              <div style={{ textAlign: 'center', marginTop: 40 }}>
-                <Link className="btn btn--primary" to="/promociones">
-                  Ver más ({totalPromos - promos.length})
-                </Link>
-              </div>
-            )}
+            <div style={{ textAlign: 'center', marginTop: 40 }}>
+              <Link className="btn btn--primary" to="/promociones">
+                Ver todo
+              </Link>
+            </div>
           </div>
         </section>
       )}
