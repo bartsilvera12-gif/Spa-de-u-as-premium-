@@ -212,11 +212,17 @@ a:hover { opacity: .8; }
 
 .promo-card {
   background: linear-gradient(135deg, var(--rose), var(--blush));
-  border-radius: var(--radius-lg); padding: 32px; color: var(--ink);
-  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-lg); color: var(--ink);
+  box-shadow: var(--shadow-sm); overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: transform .3s, box-shadow .3s;
 }
-.promo-card__title { font-family: var(--font-title); font-size: 1.55rem; margin-bottom: 6px; }
-.promo-card__desc { color: var(--ink); opacity: .8; margin-bottom: 20px; }
+.promo-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.promo-card__img { aspect-ratio: 4/3; background-size: cover; background-position: center; }
+.promo-card__body { padding: 26px 28px 30px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.promo-card__title { font-family: var(--font-title); font-size: 1.55rem; margin-bottom: 2px; }
+.promo-card__desc { color: var(--ink); opacity: .8; margin-bottom: 12px; font-size: .95rem; }
+.promo-card__prices { margin-top: auto; }
 .promo-card__price { font-family: var(--font-title); font-size: 2rem; color: var(--rose-deep); font-weight: 500; }
 .promo-card__old { color: var(--ink-soft); text-decoration: line-through; font-size: 1rem; margin-left: 10px; }
 
