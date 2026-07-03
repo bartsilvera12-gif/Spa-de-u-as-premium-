@@ -141,6 +141,29 @@ export default function Home() {
         </div>
       </section>
 
+      {promos.length > 0 && (
+        <section className="section" style={{ background: 'var(--cream)' }}>
+          <div className="section__head">
+            <div className="section__eyebrow">Promociones</div>
+            <h2 className="section__title">Combos y packs especiales</h2>
+            <p className="section__desc">
+              Aprovechá nuestros combos y packs pensados para regalarte más
+              momentos por menos. Disponibilidad limitada del mes.
+            </p>
+          </div>
+          <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+            <div className="cat-grid">
+              {promos.map((s) => <PromoCard key={s.id} servicio={s} />)}
+            </div>
+            <div style={{ textAlign: 'center', marginTop: 40 }}>
+              <Link className="btn btn--primary" to="/promociones">
+                Ver todo
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="section testimonios">
         <div className="section__head">
           <div className="section__eyebrow">Testimonios</div>
@@ -191,29 +214,6 @@ export default function Home() {
           </article>
         </div>
       </section>
-
-      {promos.length > 0 && (
-        <section className="section" style={{ background: 'var(--cream)' }}>
-          <div className="section__head">
-            <div className="section__eyebrow">Promociones</div>
-            <h2 className="section__title">Combos y packs especiales</h2>
-            <p className="section__desc">
-              Aprovechá nuestros combos y packs pensados para regalarte más
-              momentos por menos. Disponibilidad limitada del mes.
-            </p>
-          </div>
-          <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-            <div className="cat-grid">
-              {promos.map((s) => <PromoCard key={s.id} servicio={s} />)}
-            </div>
-            <div style={{ textAlign: 'center', marginTop: 40 }}>
-              <Link className="btn btn--primary" to="/promociones">
-                Ver todo
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
 
       <PublicFooter />
     </>
