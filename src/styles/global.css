@@ -174,10 +174,18 @@ a:hover { opacity: .8; }
 }
 .cat-card {
   background: white; border-radius: var(--radius-lg); overflow: hidden;
-  box-shadow: var(--shadow-sm); transition: transform .3s, box-shadow .3s;
+  box-shadow: var(--shadow-sm); transition: transform .35s ease, box-shadow .35s ease;
   cursor: pointer; text-align: left;
+  position: relative;
 }
-.cat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.cat-card:hover,
+.cat-card:focus-visible,
+.cat-card:active {
+  transform: scale(1.15);
+  box-shadow: var(--shadow-lg);
+  z-index: 5;
+}
+.cat-grid a:hover, .cat-grid a:focus-visible { z-index: 5; position: relative; }
 .cat-card__img {
   aspect-ratio: 4/3; background-size: cover; background-position: center;
 }
