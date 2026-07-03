@@ -45,11 +45,11 @@ export default function Home() {
 
       <section className="section">
         <div className="section__head">
-          <div className="section__eyebrow">Servicios</div>
+          <div className="section__eyebrow">Categorías</div>
           <h2 className="section__title">Todo lo que hacemos por vos</h2>
           <p className="section__desc">
-            Explorá nuestras categorías. Cada servicio está pensado para brindarte
-            un momento de bienestar y estética premium.
+            Explorá nuestras categorías de servicios. Cada una está pensada
+            para brindarte un momento de bienestar y estética premium.
           </p>
         </div>
         {loading ? (
