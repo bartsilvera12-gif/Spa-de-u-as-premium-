@@ -236,9 +236,16 @@ a:hover { opacity: .8; }
   border-radius: var(--radius-lg); color: var(--ink);
   box-shadow: var(--shadow-sm); overflow: hidden;
   display: flex; flex-direction: column;
-  transition: transform .3s, box-shadow .3s;
+  transition: transform .35s ease, box-shadow .35s ease;
+  position: relative;
 }
-.promo-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.promo-card:hover,
+.promo-card:focus-visible,
+.promo-card:active {
+  transform: scale(1.15);
+  box-shadow: var(--shadow-lg);
+  z-index: 5;
+}
 .promo-card__img { aspect-ratio: 4/3; background-size: cover; background-position: center; }
 .promo-card__body { padding: 26px 28px 30px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
 .promo-card__title { font-family: var(--font-title); font-size: 1.55rem; margin-bottom: 2px; }
