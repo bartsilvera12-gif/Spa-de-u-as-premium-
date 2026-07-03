@@ -180,9 +180,9 @@ insert into spanails.servicios
   (categoria_id, nombre, slug, descripcion, duracion_min, precio, precio_anterior, precio_desde, destacado, imagen_url, orden, activo)
 values
   -- Manicura clásica
-  ((select id from c where slug='manicura-clasica'), 'Manicura clásica',                    'manicura-clasica-servicio',       'Corte, limado, cutícula y esmaltado tradicional.',                        45,  50000,  null, false, false, '/galeria/manicura-clasica-1.jpg',      1, true),
+  ((select id from c where slug='manicura-clasica'), 'Manicura clásica',                    'manicura-clasica-servicio',       'Corte, limado, cutícula y esmaltado tradicional.',                        45,  40000,  null, false, false, '/galeria/manicura-clasica-1.jpg',      1, true),
   ((select id from c where slug='manicura-clasica'), 'Manicura express',                    'manicura-express',                'Retoque rápido de forma y esmaltado.',                                    25,  35000,  null, false, false, '/galeria/manicura-clasica-2.jpg',      2, true),
-  ((select id from c where slug='manicura-clasica'), 'Manicura premium con hidratación',    'manicura-premium-hidratacion',    'Manicura completa con mascarilla hidratante y masaje.',                   60,  80000,  null, false, true,  '/galeria/manicura-clasica-3.jpg',      3, true),
+  ((select id from c where slug='manicura-clasica'), 'Manicura premium con hidratación',    'manicura-premium-hidratacion',    'Manicura completa con mascarilla hidratante y masaje.',                   60,  60000,  null, false, true,  '/galeria/manicura-clasica-3.jpg',      3, true),
 
   -- Semipermanentes
   ((select id from c where slug='unas-semipermanentes'), 'Esmaltado semipermanente',            'esmaltado-semipermanente',        'Esmaltado semipermanente de larga duración.',                             60,  90000,  null, false, true,  '/galeria/semipermanente-1.jpg',  1, true),
@@ -190,8 +190,8 @@ values
   ((select id from c where slug='unas-semipermanentes'), 'Semipermanente con nail art',         'semipermanente-con-nail-art',     'Semipermanente con nail art personalizado.',                              90, 140000,  null, false, false, '/galeria/semipermanente-3.jpg',          3, true),
 
   -- Esculpidas
-  ((select id from c where slug='unas-esculpidas'), 'Uñas acrílicas',                       'unas-acrilicas',                  'Extensiones esculpidas en acrílico.',                                     120, 180000,  null, true,  true,  '/galeria/esculpidas-1.jpg',       1, true),
-  ((select id from c where slug='unas-esculpidas'), 'Uñas soft gel',                        'unas-soft-gel',                   'Extensiones en soft gel, ligeras y naturales.',                           120, 200000,  null, true,  false, '/galeria/esculpidas-2.jpg',       2, true),
+  ((select id from c where slug='unas-esculpidas'), 'Uñas acrílicas',                       'unas-acrilicas',                  'Extensiones esculpidas en acrílico.',                                     120, 170000,  null, true,  true,  '/galeria/esculpidas-1.jpg',       1, true),
+  ((select id from c where slug='unas-esculpidas'), 'Uñas soft gel',                        'unas-soft-gel',                   'Extensiones en soft gel, ligeras y naturales.',                           120, 150000,  null, true,  false, '/galeria/esculpidas-2.jpg',       2, true),
   ((select id from c where slug='unas-esculpidas'), 'Relleno de uñas',                      'relleno-unas',                    'Relleno y mantenimiento de esculpidas.',                                   90, 120000,  null, true,  false, '/galeria/esculpidas-3.jpg',       3, true),
   ((select id from c where slug='unas-esculpidas'), 'Retiro de uñas',                       'retiro-unas',                     'Retiro seguro de esculpidas y acondicionamiento.',                         45,  50000,  null, false, false, '/galeria/esculpidas-4.jpg',       4, true),
 
@@ -201,7 +201,7 @@ values
 
   -- Spa
   ((select id from c where slug='spa-manos'), 'Spa de manos',                         'spa-de-manos',                    'Ritual completo de hidratación, exfoliación y masaje de manos.',          45,  70000,  null, false, false, '/galeria/spa-manos-1.jpg',             1, true),
-  ((select id from c where slug='spa-pies'),  'Spa de pies',                          'spa-de-pies',                     'Baño relajante, exfoliación y masaje de pies.',                            60,  90000,  null, false, false, '/galeria/spa-pies-3.jpg',              1, true),
+  ((select id from c where slug='spa-pies'),  'Spa de pies',                          'spa-de-pies',                     'Baño relajante, exfoliación y masaje de pies.',                            60,  30000,  null, false, false, '/galeria/spa-pies-3.jpg',              1, true),
 
   -- Promociones
   ((select id from c where slug='promociones'), 'Combo Manos + Pies',                   'combo-manos-pies',                'Spa completo de manos y pies en una sesión.',                             120, 150000, 180000, false, true, '/combo-manos-pies.jpg',      1, true),
