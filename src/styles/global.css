@@ -198,6 +198,12 @@ a:hover { opacity: .8; }
   margin-top: 14px; padding-top: 12px;
   border-top: 1px dashed var(--petal);
 }
+.cat-card__cta,
+.promo-card__cta {
+  margin-top: 16px; align-self: flex-start;
+  padding: 10px 20px; font-size: .9rem;
+}
+.cat-card__body { display: flex; flex-direction: column; }
 
 .serv-card {
   background: white; border-radius: var(--radius-lg); overflow: hidden;

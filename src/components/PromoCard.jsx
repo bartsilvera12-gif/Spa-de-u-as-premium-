@@ -1,6 +1,12 @@
+import { MessageCircle } from 'lucide-react'
 import { formatGs } from '../lib/format.js'
 
+const WHATSAPP = '595982137690'
+
 export default function PromoCard({ servicio }) {
+  const msg = encodeURIComponent(`Hola! Quisiera reservar la promo: ${servicio.nombre}.`)
+  const link = `https://wa.me/${WHATSAPP}?text=${msg}`
+
   return (
     <article className="promo-card">
       {servicio.imagen_url && (
@@ -17,6 +23,15 @@ export default function PromoCard({ servicio }) {
             <span className="promo-card__old">{formatGs(servicio.precio_anterior)}</span>
           )}
         </div>
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener"
+          className="btn btn--primary promo-card__cta"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <MessageCircle size={16} /> Reservar
+        </a>
       </div>
     </article>
   )
