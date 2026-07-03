@@ -1,11 +1,11 @@
 import { supabase } from './supabase.js'
 import { fallbackCategorias, fallbackServicios } from '../data/fallbackData.js'
 
-const TTL_MS = 60 * 1000
 const TIMEOUT_MS = 6000
 
-const cache = new Map()      // key -> { data, expires }
-const inflight = new Map()   // key -> Promise
+// Solo deduplicación de requests en vuelo (dos componentes que piden lo mismo
+// en el mismo render comparten la promesa). NO cachea entre navegaciones.
+const inflight = new Map()
 
 function withTimeout(promise, ms) {
   return new Promise((resolve, reject) => {
@@ -17,21 +17,14 @@ function withTimeout(promise, ms) {
   })
 }
 
-async function cached(key, fetcher, fallback) {
-  const hit = cache.get(key)
-  if (hit && hit.expires > Date.now()) return hit.data
+async function fetchLive(key, fetcher, fallback) {
   if (inflight.has(key)) return inflight.get(key)
-
   const p = (async () => {
     try {
       const data = await withTimeout(fetcher(), TIMEOUT_MS)
-      const value = data && data.length ? data : fallback
-      cache.set(key, { data: value, expires: Date.now() + TTL_MS })
-      return value
+      return data && data.length ? data : fallback
     } catch (e) {
       console.warn(`[services] fallback ${key}:`, e.message)
-      // Cachear también el fallback un ratito para no reintentar en cada nav.
-      cache.set(key, { data: fallback, expires: Date.now() + 30_000 })
       return fallback
     } finally {
       inflight.delete(key)
@@ -41,14 +34,13 @@ async function cached(key, fetcher, fallback) {
   return p
 }
 
+// Ya no cachea, pero se mantiene la API por compatibilidad con AdminCategorias/AdminServicios.
 export function invalidateCache() {
-  cache.clear()
   inflight.clear()
 }
 
 export async function getCategorias({ soloActivas = true } = {}) {
-  const key = `categorias:${soloActivas}`
-  return cached(key, async () => {
+  return fetchLive(`categorias:${soloActivas}`, async () => {
     let q = supabase.from('categorias').select('*').order('orden', { ascending: true })
     if (soloActivas) q = q.eq('activo', true)
     const { data, error } = await q
@@ -58,8 +50,7 @@ export async function getCategorias({ soloActivas = true } = {}) {
 }
 
 export async function getServicios({ soloActivos = true, categoriaId = null } = {}) {
-  const key = `servicios:${soloActivos}:${categoriaId || 'all'}`
-  return cached(key, async () => {
+  return fetchLive(`servicios:${soloActivos}:${categoriaId || 'all'}`, async () => {
     let q = supabase
       .from('servicios')
       .select('*, categoria:categorias(*)')
