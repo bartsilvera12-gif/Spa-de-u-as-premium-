@@ -62,7 +62,7 @@ export default function Home() {
               con atención personalizada y estética delicada. Reservá tu momento.
             </p>
             <div className="hero__ctas">
-              <a className="btn btn--primary" href="https://wa.me/595984123456" target="_blank" rel="noopener">
+              <a className="btn btn--primary" href="https://wa.me/595982137690" target="_blank" rel="noopener">
                 Reservar por WhatsApp
               </a>
               <Link className="btn btn--outline" to="/servicios">Ver servicios</Link>
@@ -132,7 +132,7 @@ export default function Home() {
               <li>Higiene certificada y esterilización de todo el instrumental.</li>
             </ul>
             <div style={{ marginTop: 20 }}>
-              <a className="btn btn--primary" href="https://wa.me/595984123456" target="_blank" rel="noopener">
+              <a className="btn btn--primary" href="https://wa.me/595982137690" target="_blank" rel="noopener">
                 Reservar por WhatsApp
               </a>
             </div>

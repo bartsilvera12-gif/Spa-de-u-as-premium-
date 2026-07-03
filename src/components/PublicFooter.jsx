@@ -27,7 +27,7 @@ export default function PublicFooter() {
 
         <div className="pub-footer__col">
           <h4>Contacto</h4>
-          <a href="https://wa.me/595984123456" target="_blank" rel="noopener">
+          <a href="https://wa.me/595982137690" target="_blank" rel="noopener">
             <MessageCircle size={16} /> WhatsApp
           </a>
           <a href="https://instagram.com" target="_blank" rel="noopener">

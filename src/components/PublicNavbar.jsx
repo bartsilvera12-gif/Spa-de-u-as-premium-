@@ -18,7 +18,7 @@ export default function PublicNavbar() {
           <li><NavLink to="/servicios" onClick={close}>Servicios</NavLink></li>
           <li><NavLink to="/promociones" onClick={close}>Promociones</NavLink></li>
           <li><NavLink to="/galeria" onClick={close}>Galería</NavLink></li>
-          <li><a href="https://wa.me/595984123456" target="_blank" rel="noopener">Reservar</a></li>
+          <li><a href="https://wa.me/595982137690" target="_blank" rel="noopener">Reservar</a></li>
         </ul>
         <button className="pub-navbar__toggle" onClick={() => setOpen((o) => !o)} aria-label="Menú">
           {open ? <X size={26} /> : <Menu size={26} />}
