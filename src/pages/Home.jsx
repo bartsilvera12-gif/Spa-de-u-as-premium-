@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import PublicNavbar from '../components/PublicNavbar.jsx'
 import PublicFooter from '../components/PublicFooter.jsx'
 import CategoryCard from '../components/CategoryCard.jsx'
-import { getCategorias } from '../lib/services.js'
+import PromoCard from '../components/PromoCard.jsx'
+import { getCategorias, getServicios } from '../lib/services.js'
 import { fallbackGaleria } from '../data/fallbackData.js'
 
 function shuffle(arr) {
@@ -17,13 +18,19 @@ function shuffle(arr) {
 
 export default function Home() {
   const [categorias, setCategorias] = useState([])
+  const [promos, setPromos] = useState([])
+  const [totalPromos, setTotalPromos] = useState(0)
   const [loading, setLoading] = useState(true)
   const carruselImgs = useMemo(() => shuffle(fallbackGaleria).slice(0, 14), [])
 
   useEffect(() => {
     (async () => {
-      const cats = await getCategorias()
+      const [cats, servs] = await Promise.all([getCategorias(), getServicios()])
       setCategorias(cats.filter((c) => c.slug !== 'promociones'))
+      const promoCat = cats.find((c) => c.slug === 'promociones')
+      const promoList = promoCat ? servs.filter((s) => s.categoria_id === promoCat.id) : []
+      setTotalPromos(promoList.length)
+      setPromos(promoList.slice(0, 4))
       setLoading(false)
     })()
   }, [])
@@ -173,19 +180,30 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section" style={{ background: 'var(--cream)' }}>
-        <div className="cta-banner">
-          <div>
+      {promos.length > 0 && (
+        <section className="section" style={{ background: 'var(--cream)' }}>
+          <div className="section__head">
             <div className="section__eyebrow">Promociones</div>
-            <h2 className="section__title" style={{ marginBottom: 10 }}>Combos y packs especiales</h2>
-            <p style={{ color: 'var(--ink-soft)', maxWidth: 520 }}>
-              Aprovechá nuestros combos pensados para regalarte más momentos por
-              menos. Disponibilidad limitada del mes.
+            <h2 className="section__title">Combos y packs especiales</h2>
+            <p className="section__desc">
+              Aprovechá nuestros combos y packs pensados para regalarte más
+              momentos por menos. Disponibilidad limitada del mes.
             </p>
           </div>
-          <Link className="btn btn--primary" to="/promociones">Ver promociones</Link>
-        </div>
-      </section>
+          <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+            <div className="cat-grid">
+              {promos.map((s) => <PromoCard key={s.id} servicio={s} />)}
+            </div>
+            {totalPromos > promos.length && (
+              <div style={{ textAlign: 'center', marginTop: 40 }}>
+                <Link className="btn btn--primary" to="/promociones">
+                  Ver más ({totalPromos - promos.length})
+                </Link>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       <PublicFooter />
     </>
