@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Plus, Pencil, Trash2, ArrowUp, ArrowDown, Eye, EyeOff, Star } from 'lucide-react'
 import { supabase } from '../../lib/supabase.js'
 import { slugify, formatGs, formatDuracion } from '../../lib/format.js'
+import { invalidateCache } from '../../lib/services.js'
 import AdminTable from '../../components/admin/AdminTable.jsx'
 import AdminModal from '../../components/admin/AdminModal.jsx'
 import ConfirmDialog from '../../components/admin/ConfirmDialog.jsx'
@@ -101,6 +102,7 @@ export default function AdminServicios() {
     }
     if (res.error) { setErr(res.error.message); return }
 
+    invalidateCache()
     setModal({ open: false })
     setFlash('Servicio guardado correctamente')
     setTimeout(() => setFlash(''), 3000)
@@ -108,10 +110,10 @@ export default function AdminServicios() {
   }
 
   const toggleActivo = async (row) => {
-    await supabase.from('servicios').update({ activo: !row.activo }).eq('id', row.id); load()
+    await supabase.from('servicios').update({ activo: !row.activo }).eq('id', row.id); invalidateCache(); load()
   }
   const toggleDestacado = async (row) => {
-    await supabase.from('servicios').update({ destacado: !row.destacado }).eq('id', row.id); load()
+    await supabase.from('servicios').update({ destacado: !row.destacado }).eq('id', row.id); invalidateCache(); load()
   }
   const move = async (row, dir) => {
     const list = filtered
@@ -122,6 +124,7 @@ export default function AdminServicios() {
       supabase.from('servicios').update({ orden: swap.orden }).eq('id', row.id),
       supabase.from('servicios').update({ orden: row.orden }).eq('id', swap.id),
     ])
+    invalidateCache()
     load()
   }
   const doDelete = async () => {
@@ -129,6 +132,7 @@ export default function AdminServicios() {
     const { error } = await supabase.from('servicios').delete().eq('id', confirmDel.id)
     setConfirmDel(null)
     if (error) { setErr(error.message); return }
+    invalidateCache()
     setFlash('Servicio eliminado')
     setTimeout(() => setFlash(''), 3000)
     load()

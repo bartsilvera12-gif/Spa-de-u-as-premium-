@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Plus, Pencil, Trash2, ArrowUp, ArrowDown, Eye, EyeOff } from 'lucide-react'
 import { supabase } from '../../lib/supabase.js'
 import { slugify } from '../../lib/format.js'
+import { invalidateCache } from '../../lib/services.js'
 import AdminTable from '../../components/admin/AdminTable.jsx'
 import AdminModal from '../../components/admin/AdminModal.jsx'
 import ConfirmDialog from '../../components/admin/ConfirmDialog.jsx'
@@ -80,6 +81,7 @@ export default function AdminCategorias() {
     }
     if (res.error) { setErr(res.error.message); return }
 
+    invalidateCache()
     setModal({ open: false })
     setFlash('Categoría guardada correctamente')
     setTimeout(() => setFlash(''), 3000)
@@ -88,6 +90,7 @@ export default function AdminCategorias() {
 
   const toggleActivo = async (row) => {
     await supabase.from('categorias').update({ activo: !row.activo }).eq('id', row.id)
+    invalidateCache()
     load()
   }
 
@@ -99,6 +102,7 @@ export default function AdminCategorias() {
       supabase.from('categorias').update({ orden: swap.orden }).eq('id', row.id),
       supabase.from('categorias').update({ orden: row.orden }).eq('id', swap.id),
     ])
+    invalidateCache()
     load()
   }
 
@@ -107,6 +111,7 @@ export default function AdminCategorias() {
     const { error } = await supabase.from('categorias').delete().eq('id', confirmDel.id)
     setConfirmDel(null)
     if (error) { setErr(error.message); return }
+    invalidateCache()
     setFlash('Categoría eliminada')
     setTimeout(() => setFlash(''), 3000)
     load()
