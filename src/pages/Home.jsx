@@ -17,7 +17,7 @@ export default function Home() {
       setCategorias(cats)
       const promoCat = cats.find((c) => c.slug === 'promociones')
       setPromociones(
-        servs.filter((s) => s.destacado || (promoCat && s.categoria_id === promoCat.id)).slice(0, 6)
+        promoCat ? servs.filter((s) => s.categoria_id === promoCat.id) : []
       )
       setLoading(false)
     })()
