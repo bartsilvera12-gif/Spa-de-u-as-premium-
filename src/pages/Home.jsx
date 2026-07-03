@@ -18,6 +18,7 @@ function shuffle(arr) {
 
 export default function Home() {
   const [categorias, setCategorias] = useState([])
+  const [preciosMin, setPreciosMin] = useState({})
   const [promos, setPromos] = useState([])
   const [totalPromos, setTotalPromos] = useState(0)
   const [loading, setLoading] = useState(true)
@@ -27,6 +28,16 @@ export default function Home() {
     (async () => {
       const [cats, servs] = await Promise.all([getCategorias(), getServicios()])
       setCategorias(cats.filter((c) => c.slug !== 'promociones'))
+
+      const mins = {}
+      for (const s of servs) {
+        const cid = s.categoria_id || s.categoria?.id
+        const precio = Number(s.precio || 0)
+        if (!cid || !precio) continue
+        if (mins[cid] == null || precio < mins[cid]) mins[cid] = precio
+      }
+      setPreciosMin(mins)
+
       const promoCat = cats.find((c) => c.slug === 'promociones')
       const promoList = promoCat ? servs.filter((s) => s.categoria_id === promoCat.id) : []
       setTotalPromos(promoList.length)
@@ -76,7 +87,7 @@ export default function Home() {
           <div className="cat-grid">
             {categorias.map((c) => (
               <Link key={c.id} to="/servicios" style={{ textDecoration: 'none', color: 'inherit' }}>
-                <CategoryCard categoria={c} />
+                <CategoryCard categoria={c} precioDesde={preciosMin[c.id]} />
               </Link>
             ))}
           </div>

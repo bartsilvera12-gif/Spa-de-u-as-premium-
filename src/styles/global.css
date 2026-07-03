@@ -192,6 +192,12 @@ a:hover { opacity: .8; }
 .cat-card__body { padding: 22px 24px 26px; }
 .cat-card__title { font-family: var(--font-title); font-size: 1.4rem; color: var(--ink); margin-bottom: 8px; }
 .cat-card__desc { color: var(--ink-soft); font-size: .93rem; }
+.cat-card__price {
+  font-family: var(--font-title); font-size: 1.2rem;
+  color: var(--rose-deep); font-weight: 500;
+  margin-top: 14px; padding-top: 12px;
+  border-top: 1px dashed var(--petal);
+}
 
 .serv-card {
   background: white; border-radius: var(--radius-lg); overflow: hidden;
