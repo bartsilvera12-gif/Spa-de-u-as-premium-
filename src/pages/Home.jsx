@@ -1,13 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import PublicNavbar from '../components/PublicNavbar.jsx'
 import PublicFooter from '../components/PublicFooter.jsx'
 import CategoryCard from '../components/CategoryCard.jsx'
 import { getCategorias } from '../lib/services.js'
+import { fallbackGaleria } from '../data/fallbackData.js'
+
+function shuffle(arr) {
+  const a = arr.slice()
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
 
 export default function Home() {
   const [categorias, setCategorias] = useState([])
   const [loading, setLoading] = useState(true)
+  const carruselImgs = useMemo(() => shuffle(fallbackGaleria).slice(0, 14), [])
 
   useEffect(() => {
     (async () => {
@@ -63,6 +74,25 @@ export default function Home() {
             ))}
           </div>
         )}
+      </section>
+
+      <section className="carrusel-section">
+        <div className="section__head">
+          <div className="section__eyebrow">Nuestros trabajos</div>
+          <h2 className="section__title">Un vistazo a lo que hacemos</h2>
+        </div>
+        <div className="carrusel">
+          <div className="carrusel__track">
+            {[...carruselImgs, ...carruselImgs].map((img, i) => (
+              <div
+                key={`${img.src}-${i}`}
+                className="carrusel__item"
+                style={{ backgroundImage: `url(${img.src})` }}
+                aria-label={img.categoria}
+              />
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="section experiencia">

@@ -226,6 +226,39 @@ a:hover { opacity: .8; }
 .promo-card__price { font-family: var(--font-title); font-size: 2rem; color: var(--rose-deep); font-weight: 500; }
 .promo-card__old { color: var(--ink-soft); text-decoration: line-through; font-size: 1rem; margin-left: 10px; }
 
+/* ==== Carrusel infinito ==== */
+.carrusel-section {
+  padding: clamp(60px, 8vw, 90px) 0 clamp(60px, 8vw, 90px);
+  overflow: hidden;
+}
+.carrusel-section .section__head { padding: 0 20px; margin-bottom: 40px; }
+.carrusel {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+.carrusel__track {
+  display: flex; gap: 20px; width: max-content;
+  animation: carrusel-scroll 60s linear infinite;
+}
+.carrusel:hover .carrusel__track { animation-play-state: paused; }
+.carrusel__item {
+  flex: 0 0 260px; height: 260px;
+  background-size: cover; background-position: center;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+@media (max-width: 720px) {
+  .carrusel__item { flex-basis: 190px; height: 190px; }
+}
+@keyframes carrusel-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 10px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .carrusel__track { animation: none; }
+}
+
 /* ==== Sección Experiencia (Home) ==== */
 .experiencia__inner {
   max-width: 1200px; margin: 0 auto;
