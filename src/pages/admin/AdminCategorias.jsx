@@ -7,7 +7,7 @@ import AdminTable from '../../components/admin/AdminTable.jsx'
 import AdminModal from '../../components/admin/AdminModal.jsx'
 import ConfirmDialog from '../../components/admin/ConfirmDialog.jsx'
 
-const emptyForm = { id: null, nombre: '', slug: '', descripcion: '', imagen_url: '', icono: '', orden: 0, activo: true }
+const emptyForm = { id: null, nombre: '', slug: '', descripcion: '', imagen_url: '', orden: 0, activo: true }
 
 export default function AdminCategorias() {
   const [rows, setRows] = useState([])
@@ -68,7 +68,6 @@ export default function AdminCategorias() {
       slug: form.slug.trim(),
       descripcion: form.descripcion || null,
       imagen_url: form.imagen_url || null,
-      icono: form.icono || null,
       orden: Number(form.orden) || 0,
       activo: !!form.activo,
     }
@@ -188,14 +187,10 @@ export default function AdminCategorias() {
             <label className="form-label">Descripción</label>
             <textarea className="form-textarea" value={form.descripcion || ''} onChange={(e) => setField('descripcion', e.target.value)} />
           </div>
-          <div className="form-group">
+          <div className="form-group form-group--full">
             <label className="form-label">Imagen URL o ruta</label>
             <input className="form-input" placeholder="/manicura-clasica.jpg" value={form.imagen_url || ''} onChange={(e) => setField('imagen_url', e.target.value)} />
             <span className="form-hint">Podés usar rutas de /public o URLs externas.</span>
-          </div>
-          <div className="form-group">
-            <label className="form-label">Icono (opcional)</label>
-            <input className="form-input" value={form.icono || ''} onChange={(e) => setField('icono', e.target.value)} />
           </div>
           {form.imagen_url && (
             <div className="form-group form-group--full">

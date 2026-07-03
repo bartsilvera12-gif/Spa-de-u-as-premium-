@@ -1,13 +1,13 @@
 // Datos de respaldo si Supabase no responde. Mismos slugs/orden que la migración SQL.
 export const fallbackCategorias = [
-  { id: 'cat-1', nombre: 'Manicura tradicional', slug: 'manicura-clasica', descripcion: 'Cuidado clásico de manos y esmaltado tradicional.', imagen_url: '/manicura-clasica.jpg', icono: 'sparkles', orden: 1, activo: true },
-  { id: 'cat-2', nombre: 'Uñas semipermanentes', slug: 'unas-semipermanentes', descripcion: 'Esmaltado semipermanente de larga duración y brillo intenso.', imagen_url: '/unas-semipermanentes.jpg', icono: 'gem', orden: 2, activo: true },
-  { id: 'cat-3', nombre: 'Uñas acrílicas', slug: 'unas-esculpidas', descripcion: 'Extensiones acrílicas o soft gel personalizadas.', imagen_url: '/unas-esculpidas.jpg', icono: 'brush', orden: 3, activo: true },
-  { id: 'cat-4', nombre: 'Kapping gel', slug: 'kapping-gel', descripcion: 'Refuerzo natural con gel sobre uña propia.', imagen_url: '/kapping-gel.jpg', icono: 'shield', orden: 4, activo: true },
-  { id: 'cat-5', nombre: 'Nail art', slug: 'nail-art', descripcion: 'Diseños exclusivos, pedrería y detalles a medida.', imagen_url: '/nail-art.jpg', icono: 'palette', orden: 5, activo: true },
-  { id: 'cat-6', nombre: 'Spa de manos', slug: 'spa-manos', descripcion: 'Ritual de hidratación profunda y masaje para manos.', imagen_url: '/spa-manos.jpg', icono: 'hand', orden: 6, activo: true },
-  { id: 'cat-7', nombre: 'Spa de pies', slug: 'spa-pies', descripcion: 'Baño relajante, exfoliación e hidratación para pies.', imagen_url: '/spa-pies.jpg', icono: 'footprints', orden: 7, activo: true },
-  { id: 'cat-8', nombre: 'Promociones', slug: 'promociones', descripcion: 'Combos y packs especiales pensados para vos.', imagen_url: '/promociones.jpg', icono: 'heart', orden: 8, activo: true },
+  { id: 'cat-1', nombre: 'Manicura tradicional', slug: 'manicura-clasica', descripcion: 'Cuidado clásico de manos y esmaltado tradicional.', imagen_url: '/manicura-clasica.jpg', orden: 1, activo: true },
+  { id: 'cat-2', nombre: 'Uñas semipermanentes', slug: 'unas-semipermanentes', descripcion: 'Esmaltado semipermanente de larga duración y brillo intenso.', imagen_url: '/unas-semipermanentes.jpg', orden: 2, activo: true },
+  { id: 'cat-3', nombre: 'Uñas acrílicas', slug: 'unas-esculpidas', descripcion: 'Extensiones acrílicas o soft gel personalizadas.', imagen_url: '/unas-esculpidas.jpg', orden: 3, activo: true },
+  { id: 'cat-4', nombre: 'Kapping gel', slug: 'kapping-gel', descripcion: 'Refuerzo natural con gel sobre uña propia.', imagen_url: '/kapping-gel.jpg', orden: 4, activo: true },
+  { id: 'cat-5', nombre: 'Nail art', slug: 'nail-art', descripcion: 'Diseños exclusivos, pedrería y detalles a medida.', imagen_url: '/nail-art.jpg', orden: 5, activo: true },
+  { id: 'cat-6', nombre: 'Spa de manos', slug: 'spa-manos', descripcion: 'Ritual de hidratación profunda y masaje para manos.', imagen_url: '/spa-manos.jpg', orden: 6, activo: true },
+  { id: 'cat-7', nombre: 'Spa de pies', slug: 'spa-pies', descripcion: 'Baño relajante, exfoliación e hidratación para pies.', imagen_url: '/spa-pies.jpg', orden: 7, activo: true },
+  { id: 'cat-8', nombre: 'Promociones', slug: 'promociones', descripcion: 'Combos y packs especiales pensados para vos.', imagen_url: '/promociones.jpg', orden: 8, activo: true },
 ]
 
 export const fallbackServicios = [

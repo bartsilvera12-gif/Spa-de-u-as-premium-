@@ -24,7 +24,6 @@ create table if not exists spanails.categorias (
   slug         text not null unique,
   descripcion  text,
   imagen_url   text,
-  icono        text,
   orden        integer not null default 0,
   activo       boolean not null default true,
   created_at   timestamptz not null default now(),
@@ -159,15 +158,15 @@ using (user_id = auth.uid());
 -- =============================================================================
 -- SEED: categorías
 -- =============================================================================
-insert into spanails.categorias (nombre, slug, descripcion, imagen_url, icono, orden, activo) values
-  ('Manicura tradicional',  'manicura-clasica',      'Cuidado clásico de manos y esmaltado tradicional.',                '/manicura-clasica.jpg',      'sparkles',   1, true),
-  ('Uñas semipermanentes',  'unas-semipermanentes',  'Esmaltado semipermanente de larga duración y brillo intenso.',     '/unas-semipermanentes.jpg',  'gem',        2, true),
-  ('Uñas acrílicas',        'unas-esculpidas',       'Extensiones acrílicas o soft gel personalizadas.',                 '/unas-esculpidas.jpg',       'brush',      3, true),
-  ('Kapping gel',           'kapping-gel',           'Refuerzo natural con gel sobre uña propia.',                       '/kapping-gel.jpg',           'shield',     4, true),
-  ('Nail art',              'nail-art',              'Diseños exclusivos, pedrería y detalles a medida.',                '/nail-art.jpg',              'palette',    5, true),
-  ('Spa de manos',          'spa-manos',             'Ritual de hidratación profunda y masaje para manos.',              '/spa-manos.jpg',             'hand',       6, true),
-  ('Spa de pies',           'spa-pies',              'Baño relajante, exfoliación e hidratación para pies.',             '/spa-pies.jpg',              'footprints', 7, true),
-  ('Promociones',           'promociones',           'Combos y packs especiales pensados para vos.',                     '/promociones.jpg',           'heart',      8, true)
+insert into spanails.categorias (nombre, slug, descripcion, imagen_url, orden, activo) values
+  ('Manicura tradicional',  'manicura-clasica',      'Cuidado clásico de manos y esmaltado tradicional.',                '/manicura-clasica.jpg',   1, true),
+  ('Uñas semipermanentes',  'unas-semipermanentes',  'Esmaltado semipermanente de larga duración y brillo intenso.',     '/unas-semipermanentes.jpg',        2, true),
+  ('Uñas acrílicas',        'unas-esculpidas',       'Extensiones acrílicas o soft gel personalizadas.',                 '/unas-esculpidas.jpg',      3, true),
+  ('Kapping gel',           'kapping-gel',           'Refuerzo natural con gel sobre uña propia.',                       '/kapping-gel.jpg',     4, true),
+  ('Nail art',              'nail-art',              'Diseños exclusivos, pedrería y detalles a medida.',                '/nail-art.jpg',    5, true),
+  ('Spa de manos',          'spa-manos',             'Ritual de hidratación profunda y masaje para manos.',              '/spa-manos.jpg',       6, true),
+  ('Spa de pies',           'spa-pies',              'Baño relajante, exfoliación e hidratación para pies.',             '/spa-pies.jpg', 7, true),
+  ('Promociones',           'promociones',           'Combos y packs especiales pensados para vos.',                     '/promociones.jpg',      8, true)
 on conflict (slug) do nothing;
 
 -- =============================================================================
