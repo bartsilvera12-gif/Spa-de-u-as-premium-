@@ -435,8 +435,11 @@ a:hover { opacity: .8; }
   border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; padding-top: 20px;
   font-size: .85rem;
   max-width: 1200px; margin-left: auto; margin-right: auto;
-  display: flex; align-items: center; justify-content: center;
-  gap: 10px; flex-wrap: wrap; color: var(--petal); opacity: .8;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap; color: var(--petal); opacity: .8;
+}
+@media (max-width: 640px) {
+  .pub-footer__bottom { justify-content: center; text-align: center; }
 }
 .pub-footer__bottom a {
   color: var(--petal); text-decoration: none; padding: 0;
