@@ -4,9 +4,12 @@ import PublicFooter from '../components/PublicFooter.jsx'
 import PromoCard from '../components/PromoCard.jsx'
 import { getCategorias, getServicios } from '../lib/services.js'
 
+const INITIAL = 4
+
 export default function Promociones() {
   const [promos, setPromos] = useState([])
   const [loading, setLoading] = useState(true)
+  const [expandido, setExpandido] = useState(false)
 
   useEffect(() => {
     (async () => {
@@ -16,6 +19,9 @@ export default function Promociones() {
       setLoading(false)
     })()
   }, [])
+
+  const visibles = expandido ? promos : promos.slice(0, INITIAL)
+  const restantes = promos.length - INITIAL
 
   return (
     <>
@@ -39,9 +45,25 @@ export default function Promociones() {
             </div>
           )}
           {!loading && promos.length > 0 && (
-            <div className="cat-grid">
-              {promos.map((s) => <PromoCard key={s.id} servicio={s} />)}
-            </div>
+            <>
+              <div className="cat-grid">
+                {visibles.map((s) => <PromoCard key={s.id} servicio={s} />)}
+              </div>
+              {!expandido && restantes > 0 && (
+                <div style={{ textAlign: 'center', marginTop: 40 }}>
+                  <button className="btn btn--primary" onClick={() => setExpandido(true)}>
+                    Ver más ({restantes})
+                  </button>
+                </div>
+              )}
+              {expandido && promos.length > INITIAL && (
+                <div style={{ textAlign: 'center', marginTop: 40 }}>
+                  <button className="btn btn--outline" onClick={() => setExpandido(false)}>
+                    Ver menos
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>
