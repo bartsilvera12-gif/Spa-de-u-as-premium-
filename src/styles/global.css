@@ -192,6 +192,7 @@ a:hover { opacity: .8; }
 }
 .serv-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
 .serv-card__img { aspect-ratio: 4/3; background-size: cover; background-position: center; }
+.serv-card--image-only .serv-card__img { aspect-ratio: 1/1; }
 .serv-card__body { padding: 22px 24px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
 .serv-card__title { font-family: var(--font-title); font-size: 1.35rem; }
 .serv-card__desc { color: var(--ink-soft); font-size: .92rem; flex: 1; }
