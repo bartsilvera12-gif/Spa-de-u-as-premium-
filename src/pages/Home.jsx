@@ -34,6 +34,7 @@ export default function Home() {
         const cid = s.categoria_id || s.categoria?.id
         const precio = Number(s.precio || 0)
         if (!cid || !precio) continue
+        if (s.precio_desde) continue  // saltar precios por unidad / desde
         if (mins[cid] == null || precio < mins[cid]) mins[cid] = precio
       }
       setPreciosMin(mins)
