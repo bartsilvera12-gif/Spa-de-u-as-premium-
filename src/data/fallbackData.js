@@ -1,6 +1,6 @@
 // Datos de respaldo si Supabase no responde. Mismos slugs/orden que la migración SQL.
 export const fallbackCategorias = [
-  { id: 'cat-1', nombre: 'Manicura clásica', slug: 'manicura-clasica', descripcion: 'Cuidado clásico de manos y esmaltado tradicional.', imagen_url: '/manicura-clasica.jpg', icono: 'sparkles', orden: 1, activo: true },
+  { id: 'cat-1', nombre: 'Manicura tradicional', slug: 'manicura-clasica', descripcion: 'Cuidado clásico de manos y esmaltado tradicional.', imagen_url: '/manicura-clasica.jpg', icono: 'sparkles', orden: 1, activo: true },
   { id: 'cat-2', nombre: 'Uñas semipermanentes', slug: 'unas-semipermanentes', descripcion: 'Esmaltado semipermanente de larga duración y brillo intenso.', imagen_url: '/unas-semipermanentes.jpg', icono: 'gem', orden: 2, activo: true },
   { id: 'cat-3', nombre: 'Uñas acrílicas', slug: 'unas-esculpidas', descripcion: 'Extensiones acrílicas o soft gel personalizadas.', imagen_url: '/unas-esculpidas.jpg', icono: 'brush', orden: 3, activo: true },
   { id: 'cat-4', nombre: 'Kapping gel', slug: 'kapping-gel', descripcion: 'Refuerzo natural con gel sobre uña propia.', imagen_url: '/kapping-gel.jpg', icono: 'shield', orden: 4, activo: true },

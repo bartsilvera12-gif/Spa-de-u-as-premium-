@@ -160,7 +160,7 @@ using (user_id = auth.uid());
 -- SEED: categorías
 -- =============================================================================
 insert into spanails.categorias (nombre, slug, descripcion, imagen_url, icono, orden, activo) values
-  ('Manicura clásica',      'manicura-clasica',      'Cuidado clásico de manos y esmaltado tradicional.',                '/manicura-clasica.jpg',      'sparkles',   1, true),
+  ('Manicura tradicional',  'manicura-clasica',      'Cuidado clásico de manos y esmaltado tradicional.',                '/manicura-clasica.jpg',      'sparkles',   1, true),
   ('Uñas semipermanentes',  'unas-semipermanentes',  'Esmaltado semipermanente de larga duración y brillo intenso.',     '/unas-semipermanentes.jpg',  'gem',        2, true),
   ('Uñas acrílicas',        'unas-esculpidas',       'Extensiones acrílicas o soft gel personalizadas.',                 '/unas-esculpidas.jpg',       'brush',      3, true),
   ('Kapping gel',           'kapping-gel',           'Refuerzo natural con gel sobre uña propia.',                       '/kapping-gel.jpg',           'shield',     4, true),
