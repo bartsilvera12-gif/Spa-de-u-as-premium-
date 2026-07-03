@@ -15,6 +15,7 @@ export default function PublicFooter() {
           <h4>Navegación</h4>
           <Link to="/">Inicio</Link>
           <Link to="/servicios">Servicios</Link>
+          <Link to="/promociones">Promociones</Link>
           <Link to="/galeria">Galería</Link>
           <Link to="/politicadeprivacidad">Política de privacidad</Link>
         </div>

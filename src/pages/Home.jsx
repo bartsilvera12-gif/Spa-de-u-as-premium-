@@ -3,22 +3,16 @@ import { Link } from 'react-router-dom'
 import PublicNavbar from '../components/PublicNavbar.jsx'
 import PublicFooter from '../components/PublicFooter.jsx'
 import CategoryCard from '../components/CategoryCard.jsx'
-import PromoCard from '../components/PromoCard.jsx'
-import { getCategorias, getServicios } from '../lib/services.js'
+import { getCategorias } from '../lib/services.js'
 
 export default function Home() {
   const [categorias, setCategorias] = useState([])
-  const [promociones, setPromociones] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     (async () => {
-      const [cats, servs] = await Promise.all([getCategorias(), getServicios()])
-      setCategorias(cats)
-      const promoCat = cats.find((c) => c.slug === 'promociones')
-      setPromociones(
-        promoCat ? servs.filter((s) => s.categoria_id === promoCat.id) : []
-      )
+      const cats = await getCategorias()
+      setCategorias(cats.filter((c) => c.slug !== 'promociones'))
       setLoading(false)
     })()
   }, [])
@@ -70,20 +64,6 @@ export default function Home() {
           </div>
         )}
       </section>
-
-      {promociones.length > 0 && (
-        <section className="section" style={{ background: 'var(--cream)' }}>
-          <div className="section__head">
-            <div className="section__eyebrow">Promociones</div>
-            <h2 className="section__title">Combos y packs especiales</h2>
-          </div>
-          <div className="cat-grid">
-            {promociones.map((s) => (
-              <PromoCard key={s.id} servicio={s} />
-            ))}
-          </div>
-        </section>
-      )}
 
       <PublicFooter />
     </>

@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import Servicios from './pages/Servicios.jsx'
 import Galeria from './pages/Galeria.jsx'
+import Promociones from './pages/Promociones.jsx'
 import PoliticaPrivacidad from './pages/PoliticaPrivacidad.jsx'
 import AdminLogin from './pages/admin/AdminLogin.jsx'
 import AdminLayout from './pages/admin/AdminLayout.jsx'
@@ -17,6 +18,7 @@ export default function App() {
       <Route path="/" element={<Home />} />
       <Route path="/servicios" element={<Servicios />} />
       <Route path="/galeria" element={<Galeria />} />
+      <Route path="/promociones" element={<Promociones />} />
       <Route path="/politicadeprivacidad" element={<PoliticaPrivacidad />} />
 
       {/* Admin */}

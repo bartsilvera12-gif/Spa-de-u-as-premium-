@@ -11,7 +11,7 @@ export default function Servicios() {
   useEffect(() => {
     (async () => {
       const grupos = await getServiciosPorCategoria()
-      setData(grupos)
+      setData(grupos.filter((g) => g.slug !== 'promociones'))
       setLoading(false)
     })()
   }, [])

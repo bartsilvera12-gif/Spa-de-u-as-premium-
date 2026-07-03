@@ -16,6 +16,7 @@ export default function PublicNavbar() {
         <ul className={`pub-navbar__menu ${open ? 'pub-navbar__menu--open' : ''}`}>
           <li><NavLink to="/" end onClick={close}>Inicio</NavLink></li>
           <li><NavLink to="/servicios" onClick={close}>Servicios</NavLink></li>
+          <li><NavLink to="/promociones" onClick={close}>Promociones</NavLink></li>
           <li><NavLink to="/galeria" onClick={close}>Galería</NavLink></li>
           <li><a href="https://wa.me/595984123456" target="_blank" rel="noopener">Reservar</a></li>
         </ul>
