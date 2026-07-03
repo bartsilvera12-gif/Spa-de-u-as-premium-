@@ -92,6 +92,57 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section testimonios">
+        <div className="section__head">
+          <div className="section__eyebrow">Testimonios</div>
+          <h2 className="section__title">Lo que dicen nuestras clientas</h2>
+        </div>
+        <div className="testi-grid">
+          <article className="testi-card">
+            <div className="testi-card__stars">★★★★★</div>
+            <p className="testi-card__text">
+              “Un ambiente hermoso y súper prolijo. Salí encantada con mi
+              semipermanente, ya llevo tres semanas y sigue impecable.”
+            </p>
+            <div className="testi-card__author">
+              <span className="testi-card__avatar">C</span>
+              <div>
+                <strong>Carolina F.</strong>
+                <small>Cliente frecuente</small>
+              </div>
+            </div>
+          </article>
+          <article className="testi-card">
+            <div className="testi-card__stars">★★★★★</div>
+            <p className="testi-card__text">
+              “Me hicieron el pack novia y fue una experiencia soñada. Muy
+              atentas, detallistas y el resultado fue perfecto para mi día.”
+            </p>
+            <div className="testi-card__author">
+              <span className="testi-card__avatar">M</span>
+              <div>
+                <strong>María José R.</strong>
+                <small>Pack Novia</small>
+              </div>
+            </div>
+          </article>
+          <article className="testi-card">
+            <div className="testi-card__stars">★★★★★</div>
+            <p className="testi-card__text">
+              “Las esculpidas quedaron increíbles y el nail art es una obra de
+              arte. Ya reservé mi próximo turno, no me atiendo en otro lado.”
+            </p>
+            <div className="testi-card__author">
+              <span className="testi-card__avatar">L</span>
+              <div>
+                <strong>Lucía A.</strong>
+                <small>Cliente frecuente</small>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section className="section" style={{ background: 'var(--cream)' }}>
         <div className="cta-banner">
           <div>

@@ -255,6 +255,38 @@ a:hover { opacity: .8; }
   background: var(--rose-deep);
 }
 
+/* ==== Testimonios ==== */
+.testimonios { background: var(--petal); }
+.testi-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; gap: 26px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.testi-card {
+  background: white; border-radius: var(--radius-lg); padding: 28px;
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; gap: 16px;
+  transition: transform .3s, box-shadow .3s;
+}
+.testi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.testi-card__stars { color: var(--gold); letter-spacing: 3px; font-size: 1.05rem; }
+.testi-card__text {
+  font-family: var(--font-title); font-size: 1.15rem; color: var(--ink);
+  line-height: 1.45; font-style: italic; flex: 1;
+}
+.testi-card__author {
+  display: flex; align-items: center; gap: 12px;
+  padding-top: 16px; border-top: 1px dashed var(--petal);
+}
+.testi-card__avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--rose-deep); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-title); font-size: 1.2rem; font-weight: 500;
+}
+.testi-card__author strong { display: block; color: var(--ink); font-weight: 500; }
+.testi-card__author small { color: var(--ink-soft); font-size: .82rem; }
+
 /* ==== CTA banner ==== */
 .cta-banner {
   max-width: 1200px; margin: 0 auto;
