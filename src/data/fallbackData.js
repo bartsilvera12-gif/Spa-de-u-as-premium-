@@ -2,7 +2,7 @@
 export const fallbackCategorias = [
   { id: 'cat-1', nombre: 'Manicura clásica', slug: 'manicura-clasica', descripcion: 'Cuidado clásico de manos y esmaltado tradicional.', imagen_url: '/manicura-clasica.jpg', icono: 'sparkles', orden: 1, activo: true },
   { id: 'cat-2', nombre: 'Uñas semipermanentes', slug: 'unas-semipermanentes', descripcion: 'Esmaltado semipermanente de larga duración y brillo intenso.', imagen_url: '/unas-semipermanentes.jpg', icono: 'gem', orden: 2, activo: true },
-  { id: 'cat-3', nombre: 'Uñas esculpidas', slug: 'unas-esculpidas', descripcion: 'Extensiones acrílicas o soft gel personalizadas.', imagen_url: '/unas-esculpidas.jpg', icono: 'brush', orden: 3, activo: true },
+  { id: 'cat-3', nombre: 'Uñas acrílicas', slug: 'unas-esculpidas', descripcion: 'Extensiones acrílicas o soft gel personalizadas.', imagen_url: '/unas-esculpidas.jpg', icono: 'brush', orden: 3, activo: true },
   { id: 'cat-4', nombre: 'Kapping gel', slug: 'kapping-gel', descripcion: 'Refuerzo natural con gel sobre uña propia.', imagen_url: '/kapping-gel.jpg', icono: 'shield', orden: 4, activo: true },
   { id: 'cat-5', nombre: 'Nail art', slug: 'nail-art', descripcion: 'Diseños exclusivos, pedrería y detalles a medida.', imagen_url: '/nail-art.jpg', icono: 'palette', orden: 5, activo: true },
   { id: 'cat-6', nombre: 'Spa de manos', slug: 'spa-manos', descripcion: 'Ritual de hidratación profunda y masaje para manos.', imagen_url: '/spa-manos.jpg', icono: 'hand', orden: 6, activo: true },
