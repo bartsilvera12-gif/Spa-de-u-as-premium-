@@ -65,6 +65,47 @@ export default function Home() {
         )}
       </section>
 
+      <section className="section experiencia">
+        <div className="experiencia__inner">
+          <div className="experiencia__image" style={{ backgroundImage: 'url(/experiencia.jpg)' }} />
+          <div className="experiencia__text">
+            <div className="section__eyebrow">La experiencia</div>
+            <h2 className="section__title">Un ritual pensado en cada detalle</h2>
+            <p style={{ color: 'var(--ink-soft)', marginBottom: 14 }}>
+              Trabajamos con productos premium, materiales de primera calidad y
+              técnicas actualizadas. Cada cita se agenda con espacio suficiente
+              para que puedas disfrutar sin apuros y salir con manos y pies
+              impecables.
+            </p>
+            <ul className="experiencia__list">
+              <li>Atención personalizada y sin superposición de turnos.</li>
+              <li>Productos de larga duración y bajo daño para tu uña natural.</li>
+              <li>Ambiente delicado con música suave y aromas relajantes.</li>
+              <li>Higiene certificada y esterilización de todo el instrumental.</li>
+            </ul>
+            <div style={{ marginTop: 20 }}>
+              <a className="btn btn--primary" href="https://wa.me/595984123456" target="_blank" rel="noopener">
+                Reservar por WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" style={{ background: 'var(--cream)' }}>
+        <div className="cta-banner">
+          <div>
+            <div className="section__eyebrow">Promociones</div>
+            <h2 className="section__title" style={{ marginBottom: 10 }}>Combos y packs especiales</h2>
+            <p style={{ color: 'var(--ink-soft)', maxWidth: 520 }}>
+              Aprovechá nuestros combos pensados para regalarte más momentos por
+              menos. Disponibilidad limitada del mes.
+            </p>
+          </div>
+          <Link className="btn btn--primary" to="/promociones">Ver promociones</Link>
+        </div>
+      </section>
+
       <PublicFooter />
     </>
   )

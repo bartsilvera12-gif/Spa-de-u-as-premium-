@@ -226,6 +226,46 @@ a:hover { opacity: .8; }
 .promo-card__price { font-family: var(--font-title); font-size: 2rem; color: var(--rose-deep); font-weight: 500; }
 .promo-card__old { color: var(--ink-soft); text-decoration: line-through; font-size: 1rem; margin-left: 10px; }
 
+/* ==== Sección Experiencia (Home) ==== */
+.experiencia__inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; align-items: center;
+}
+@media (max-width: 900px) {
+  .experiencia__inner { grid-template-columns: 1fr; gap: 32px; }
+}
+.experiencia__image {
+  aspect-ratio: 4/5;
+  border-radius: var(--radius-lg);
+  background-size: cover; background-position: center;
+  box-shadow: var(--shadow-md);
+}
+.experiencia__text .section__eyebrow { text-align: left; margin-bottom: 8px; }
+.experiencia__text .section__title { text-align: left; margin-bottom: 16px; }
+.experiencia__list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.experiencia__list li {
+  position: relative; padding-left: 26px; color: var(--ink);
+}
+.experiencia__list li::before {
+  content: ''; position: absolute; left: 0; top: 10px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--rose-deep);
+}
+
+/* ==== CTA banner ==== */
+.cta-banner {
+  max-width: 1200px; margin: 0 auto;
+  background: linear-gradient(135deg, var(--blush), var(--petal));
+  border-radius: var(--radius-lg); padding: 44px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 30px; flex-wrap: wrap; box-shadow: var(--shadow-sm);
+}
+.cta-banner .section__title { margin-bottom: 6px; }
+.cta-banner .section__eyebrow { text-align: left; margin-bottom: 8px; }
+
 /* ==== Grupo categoría con servicios (Servicios page) ==== */
 .cat-group { margin-bottom: 72px; }
 .cat-group__head {
