@@ -7,7 +7,7 @@ export default function PublicFooter() {
       <div className="pub-footer__inner">
         <div className="pub-footer__col">
           <div className="pub-footer__brand">
-            <span className="pub-footer__logo">S</span>
+            <img className="pub-footer__logo" src="/logo.png" alt="Spa de Uñas Premium" />
             <span>Spa de Uñas Premium</span>
           </div>
           <p className="pub-footer__desc">

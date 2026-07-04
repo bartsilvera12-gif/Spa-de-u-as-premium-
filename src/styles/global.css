@@ -72,10 +72,8 @@ a:hover { opacity: .8; }
   font-family: var(--font-title); font-size: 1.5rem; color: var(--ink);
 }
 .pub-navbar__logo {
-  width: 42px; height: 42px; border-radius: 50%;
-  background: var(--rose-deep); color: white;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-title); font-size: 1.3rem; font-weight: 600;
+  width: 44px; height: 44px; border-radius: 50%;
+  object-fit: cover; background: white;
   box-shadow: var(--shadow-sm);
 }
 .pub-navbar__menu {
@@ -429,10 +427,8 @@ a:hover { opacity: .8; }
   margin-bottom: 10px;
 }
 .pub-footer__logo {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: var(--rose-deep); color: white;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-title); font-size: 1.2rem; font-weight: 500;
+  width: 44px; height: 44px; border-radius: 50%;
+  object-fit: cover; background: white;
 }
 .pub-footer__desc { color: var(--petal); opacity: .8; font-size: .92rem; line-height: 1.6; }
 .pub-footer__loc {

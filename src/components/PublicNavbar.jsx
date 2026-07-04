@@ -10,7 +10,7 @@ export default function PublicNavbar() {
     <nav className="pub-navbar">
       <div className="pub-navbar__inner">
         <Link to="/" className="pub-navbar__brand" onClick={close}>
-          <span className="pub-navbar__logo">S</span>
+          <img className="pub-navbar__logo" src="/logo.png" alt="Spa de Uñas Premium" />
           <span>Spa de Uñas</span>
         </Link>
         <ul className={`pub-navbar__menu ${open ? 'pub-navbar__menu--open' : ''}`}>
