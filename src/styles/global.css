@@ -74,7 +74,7 @@ a:hover { opacity: .8; }
 .pub-navbar__logo {
   width: 44px; height: 44px; border-radius: 50%;
   object-fit: cover; background: white;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm); cursor: pointer;
 }
 .pub-navbar__menu {
   display: flex; gap: 28px; align-items: center; list-style: none;
@@ -396,6 +396,7 @@ a:hover { opacity: .8; }
   z-index: 100; padding: 40px; cursor: zoom-out;
 }
 .lightbox img { max-width: 90vw; max-height: 90vh; border-radius: var(--radius-md); }
+.lightbox__logo { width: min(82vw, 460px); height: auto; cursor: default; border-radius: 50%; }
 .lightbox__close {
   position: absolute; top: 20px; right: 20px; background: white;
   border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
