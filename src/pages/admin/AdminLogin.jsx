@@ -40,7 +40,7 @@ export default function AdminLogin() {
   return (
     <div className="login-shell">
       <div className="login-card">
-        <div className="login-logo">S</div>
+        <img className="login-logo" src="/logo.png" alt="Spa de Uñas Premium" />
         <h1 className="login-title">Panel administrativo</h1>
         <p className="login-sub">Gestioná servicios, precios y categorías</p>
 

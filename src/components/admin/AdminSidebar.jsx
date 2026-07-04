@@ -11,7 +11,7 @@ export default function AdminSidebar({ onLogout }) {
   return (
     <aside className="admin-sidebar">
       <div className="admin-sidebar__brand">
-        <span className="admin-sidebar__logo">S</span>
+        <img className="admin-sidebar__logo" src="/logo.png" alt="Spa de Uñas Premium" />
         <div className="admin-sidebar__brand-text">
           Spa de Uñas
           <small>Panel administrativo</small>
