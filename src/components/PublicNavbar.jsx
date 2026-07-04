@@ -21,6 +21,7 @@ export default function PublicNavbar() {
   }, [showLogo])
 
   return (
+    <>
     <nav className="pub-navbar">
       <div className="pub-navbar__inner">
         <Link to="/" className="pub-navbar__brand" onClick={close}>
@@ -44,20 +45,20 @@ export default function PublicNavbar() {
           {open ? <X size={26} /> : <Menu size={26} />}
         </button>
       </div>
-
-      {showLogo && (
-        <div className="lightbox" onClick={() => setShowLogo(false)}>
-          <button className="lightbox__close" aria-label="Cerrar" onClick={() => setShowLogo(false)}>
-            <X size={24} />
-          </button>
-          <img
-            className="lightbox__logo"
-            src="/logo.png"
-            alt="Spa de Uñas Premium"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
     </nav>
+
+    {showLogo && (
+      <div className="lightbox" onClick={() => setShowLogo(false)}>
+        <button className="lightbox__close" aria-label="Cerrar" onClick={() => setShowLogo(false)}>
+          <X size={24} />
+        </button>
+        <img
+          className="lightbox__logo"
+          src="/logo.png"
+          alt="Spa de Uñas Premium"
+        />
+      </div>
+    )}
+    </>
   )
 }

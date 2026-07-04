@@ -396,7 +396,7 @@ a:hover { opacity: .8; }
   z-index: 100; padding: 40px; cursor: zoom-out;
 }
 .lightbox img { max-width: 90vw; max-height: 90vh; border-radius: var(--radius-md); }
-.lightbox__logo { width: min(82vw, 460px); height: auto; cursor: default; border-radius: 50%; }
+.lightbox__logo { max-width: min(82vw, 460px); max-height: 82vh; width: auto; height: auto; cursor: pointer; border-radius: 50%; }
 .lightbox__close {
   position: absolute; top: 20px; right: 20px; background: white;
   border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
