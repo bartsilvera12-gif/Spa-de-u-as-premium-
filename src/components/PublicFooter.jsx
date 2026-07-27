@@ -7,12 +7,12 @@ export default function PublicFooter() {
       <div className="pub-footer__inner">
         <div className="pub-footer__col">
           <div className="pub-footer__brand">
-            <img className="pub-footer__logo" src="/logo.png" alt="Spa de Uñas Premium" />
-            <span>Spa de Uñas Premium</span>
+            <img className="pub-footer__logo" src="/logo.png" alt="Mabel Beauty & Spa" />
+            <span>Mabel Beauty &amp; Spa</span>
           </div>
           <p className="pub-footer__desc">
-            Un espacio pensado para regalarte tiempo. Manicura, esculpidas, spa
-            y nail art con atención personalizada.
+            Centro de belleza integral premium. Estética facial y corporal, spa,
+            peluquería, uñas y bienestar con atención personalizada.
           </p>
         </div>
 
@@ -39,7 +39,7 @@ export default function PublicFooter() {
         </div>
       </div>
       <div className="pub-footer__bottom">
-        <span>© {new Date().getFullYear()} Spa de Uñas Premium. Todos los derechos reservados.</span>
+        <span>© {new Date().getFullYear()} Mabel Beauty &amp; Spa. Todos los derechos reservados.</span>
         <span>Desarrollado por <a href="https://neura.com.py" target="_blank" rel="noopener"><strong>NEURA</strong></a></span>
       </div>
     </footer>

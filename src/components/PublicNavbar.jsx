@@ -28,11 +28,11 @@ export default function PublicNavbar() {
           <img
             className="pub-navbar__logo"
             src="/logo.png"
-            alt="Spa de Uñas Premium"
+            alt="Mabel Beauty & Spa"
             onClick={openLogo}
             title="Ver logo"
           />
-          <span>Spa de Uñas</span>
+          <span>Mabel Beauty &amp; Spa</span>
         </Link>
         <ul className={`pub-navbar__menu ${open ? 'pub-navbar__menu--open' : ''}`}>
           <li><NavLink to="/" end onClick={close}>Inicio</NavLink></li>
@@ -55,7 +55,7 @@ export default function PublicNavbar() {
         <img
           className="lightbox__logo"
           src="/logo.png"
-          alt="Spa de Uñas Premium"
+          alt="Mabel Beauty & Spa"
         />
       </div>
     )}

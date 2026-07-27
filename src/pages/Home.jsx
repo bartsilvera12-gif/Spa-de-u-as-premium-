@@ -1,11 +1,19 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { ChevronDown } from 'lucide-react'
 import PublicNavbar from '../components/PublicNavbar.jsx'
 import PublicFooter from '../components/PublicFooter.jsx'
-import CategoryCard from '../components/CategoryCard.jsx'
 import PromoCard from '../components/PromoCard.jsx'
 import { getCategorias, getServicios } from '../lib/services.js'
 import { fallbackGaleria } from '../data/fallbackData.js'
+import { catalogo } from '../data/catalogo.js'
+
+const WHATSAPP = '595982137690'
+
+function reservaLink(nombre) {
+  const msg = encodeURIComponent(`Hola! Quisiera reservar un turno de ${nombre}.`)
+  return `https://wa.me/${WHATSAPP}?text=${msg}`
+}
 
 function shuffle(arr) {
   const a = arr.slice()
@@ -17,31 +25,16 @@ function shuffle(arr) {
 }
 
 export default function Home() {
-  const [categorias, setCategorias] = useState([])
-  const [preciosMin, setPreciosMin] = useState({})
   const [promos, setPromos] = useState([])
-  const [totalPromos, setTotalPromos] = useState(0)
   const [loading, setLoading] = useState(true)
+  const [abierta, setAbierta] = useState(null)
   const carruselImgs = useMemo(() => shuffle(fallbackGaleria).slice(0, 14), [])
 
   useEffect(() => {
     (async () => {
       const [cats, servs] = await Promise.all([getCategorias(), getServicios()])
-      setCategorias(cats.filter((c) => c.slug !== 'promociones'))
-
-      const mins = {}
-      for (const s of servs) {
-        const cid = s.categoria_id || s.categoria?.id
-        const precio = Number(s.precio || 0)
-        if (!cid || !precio) continue
-        if (s.precio_desde) continue  // saltar precios por unidad / desde
-        if (mins[cid] == null || precio < mins[cid]) mins[cid] = precio
-      }
-      setPreciosMin(mins)
-
       const promoCat = cats.find((c) => c.slug === 'promociones')
       const promoList = promoCat ? servs.filter((s) => s.categoria_id === promoCat.id) : []
-      setTotalPromos(promoList.length)
       setPromos(promoList.slice(0, 4))
       setLoading(false)
     })()
@@ -54,16 +47,17 @@ export default function Home() {
       <section className="hero">
         <div className="hero__inner">
           <div>
-            <span className="hero__eyebrow">Experiencia premium</span>
+            <span className="hero__eyebrow">Centro de belleza integral</span>
             <h1 className="hero__title">
-              Manos que hablan de <em>vos</em>.
+              Tu belleza, <em>en un solo lugar</em>.
             </h1>
             <p className="hero__desc">
-              Un ritual femenino de manicura, semipermanente, esculpidas y spa,
-              con atención personalizada y estética delicada. Reservá tu momento.
+              Estética facial y corporal, spa, peluquería, uñas, maquillaje y
+              experiencias de bienestar premium. Un espacio pensado para cuidarte
+              de la cabeza a los pies.
             </p>
             <div className="hero__ctas">
-              <a className="btn btn--primary" href="https://wa.me/595982137690" target="_blank" rel="noopener">
+              <a className="btn btn--primary" href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noopener">
                 Reservar por WhatsApp
               </a>
               <Link className="btn btn--outline" to="/servicios">Ver servicios</Link>
@@ -75,24 +69,63 @@ export default function Home() {
 
       <section className="section">
         <div className="section__head">
-          <div className="section__eyebrow">Categorías</div>
+          <div className="section__eyebrow">Áreas</div>
           <h2 className="section__title">Todo lo que hacemos por vos</h2>
           <p className="section__desc">
-            Explorá nuestras categorías de servicios. Cada una está pensada
-            para brindarte un momento de bienestar y estética premium.
+            Un catálogo completo de belleza, estética y bienestar. Explorá cada
+            área y reservá el ritual que buscás.
           </p>
         </div>
-        {loading ? (
-          <div className="state"><div className="spinner" /></div>
-        ) : (
-          <div className="cat-grid">
-            {categorias.map((c) => (
-              <Link key={c.id} to="/servicios" style={{ textDecoration: 'none', color: 'inherit' }}>
-                <CategoryCard categoria={c} precioDesde={preciosMin[c.id]} />
-              </Link>
-            ))}
-          </div>
-        )}
+        <div className="area-grid">
+          {catalogo.map((c) => {
+            const open = abierta === c.id
+            return (
+              <div key={c.id} className={`area-item ${open ? 'area-item--open' : ''}`}>
+                <button
+                  className="area-card"
+                  aria-expanded={open}
+                  onClick={() => setAbierta(open ? null : c.id)}
+                >
+                  <span className="area-card__icon" aria-hidden="true">{c.icono}</span>
+                  <div className="area-card__body">
+                    <h3 className="area-card__title">{c.nombre}</h3>
+                    <p className="area-card__desc">{c.descripcion}</p>
+                  </div>
+                  <ChevronDown className="area-card__chevron" size={22} aria-hidden="true" />
+                </button>
+
+                {open && (
+                  <div className="area-panel">
+                    <div className="area-panel__groups">
+                      {c.grupos.map((g, i) => (
+                        <div key={i} className="serv-group">
+                          {g.titulo && <h4 className="serv-group__title">{g.titulo}</h4>}
+                          <ul className="serv-list">
+                            {g.servicios.map((s) => (
+                              <li key={s} className="serv-list__item">
+                                <a href={reservaLink(s)} target="_blank" rel="noopener" title={`Reservar ${s}`}>
+                                  {s}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                    <a
+                      className="btn btn--primary btn--sm area-panel__cta"
+                      href={reservaLink(c.nombre)}
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Reservar {c.nombre}
+                    </a>
+                  </div>
+                )}
+              </div>
+            )
+          })}
+        </div>
       </section>
 
       <section className="carrusel-section">
@@ -121,19 +154,18 @@ export default function Home() {
             <div className="section__eyebrow">La experiencia</div>
             <h2 className="section__title">Un ritual pensado en cada detalle</h2>
             <p style={{ color: 'var(--ink-soft)', marginBottom: 14 }}>
-              Trabajamos con productos premium, materiales de primera calidad y
-              técnicas actualizadas. Cada cita se agenda con espacio suficiente
-              para que puedas disfrutar sin apuros y salir con manos y pies
-              impecables.
+              Combinamos estética avanzada, spa y bienestar con productos premium,
+              tecnología de última generación y profesionales especializados. Cada
+              cita se agenda con espacio suficiente para que disfrutes sin apuros.
             </p>
             <ul className="experiencia__list">
               <li>Atención personalizada y sin superposición de turnos.</li>
-              <li>Productos de larga duración y bajo daño para tu uña natural.</li>
-              <li>Ambiente delicado con música suave y aromas relajantes.</li>
+              <li>Aparatología y productos profesionales de primera calidad.</li>
+              <li>Ambiente relajante con música suave y aromaterapia.</li>
               <li>Higiene certificada y esterilización de todo el instrumental.</li>
             </ul>
             <div style={{ marginTop: 20 }}>
-              <a className="btn btn--primary" href="https://wa.me/595982137690" target="_blank" rel="noopener">
+              <a className="btn btn--primary" href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noopener">
                 Reservar por WhatsApp
               </a>
             </div>
@@ -141,7 +173,7 @@ export default function Home() {
         </div>
       </section>
 
-      {promos.length > 0 && (
+      {!loading && promos.length > 0 && (
         <section className="section" style={{ background: 'var(--cream)' }}>
           <div className="section__head">
             <div className="section__eyebrow">Promociones</div>
@@ -173,42 +205,42 @@ export default function Home() {
           <article className="testi-card">
             <div className="testi-card__stars">★★★★★</div>
             <p className="testi-card__text">
-              “Un ambiente hermoso y súper prolijo. Salí encantada con mi
-              semipermanente, ya llevo tres semanas y sigue impecable.”
+              “Un ambiente hermoso y súper prolijo. Salí renovada después de mi
+              tratamiento facial, la piel me quedó espectacular.”
             </p>
             <div className="testi-card__author">
               <span className="testi-card__avatar">C</span>
               <div>
                 <strong>Carolina F.</strong>
-                <small>Cliente frecuente</small>
+                <small>Estética facial</small>
               </div>
             </div>
           </article>
           <article className="testi-card">
             <div className="testi-card__stars">★★★★★</div>
             <p className="testi-card__text">
-              “Me hicieron el pack novia y fue una experiencia soñada. Muy
-              atentas, detallistas y el resultado fue perfecto para mi día.”
+              “Me hicieron el ritual bridal completo y fue una experiencia soñada.
+              Muy atentas, detallistas y el resultado fue perfecto para mi día.”
             </p>
             <div className="testi-card__author">
               <span className="testi-card__avatar">M</span>
               <div>
                 <strong>María José R.</strong>
-                <small>Pack Novia</small>
+                <small>Programa Premium</small>
               </div>
             </div>
           </article>
           <article className="testi-card">
             <div className="testi-card__stars">★★★★★</div>
             <p className="testi-card__text">
-              “Las esculpidas quedaron increíbles y el nail art es una obra de
-              arte. Ya reservé mi próximo turno, no me atiendo en otro lado.”
+              “El masaje descontracturante y el circuito de spa son lo mejor de
+              Asunción. Ya reservé mi próxima sesión, no me atiendo en otro lado.”
             </p>
             <div className="testi-card__author">
               <span className="testi-card__avatar">L</span>
               <div>
                 <strong>Lucía A.</strong>
-                <small>Cliente frecuente</small>
+                <small>Masajes & Spa</small>
               </div>
             </div>
           </article>

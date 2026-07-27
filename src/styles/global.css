@@ -367,6 +367,123 @@ a:hover { opacity: .8; }
 .cta-banner .section__title { margin-bottom: 6px; }
 .cta-banner .section__eyebrow { text-align: left; margin-bottom: 8px; }
 
+/* ==== Grilla de áreas (Home) — tarjetas con ícono ==== */
+.area-grid {
+  display: flex; flex-direction: column; gap: 14px;
+  max-width: 1200px; margin: 0 auto;
+}
+.area-item {
+  background: white; border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm); border: 1px solid rgba(217,123,126,0.08);
+  overflow: hidden;
+  transition: box-shadow .25s ease, border-color .25s ease;
+}
+.area-item:hover { box-shadow: var(--shadow-md); border-color: var(--rose); }
+.area-item--open { box-shadow: var(--shadow-md); border-color: var(--rose); }
+.area-card {
+  width: 100%; background: transparent; border: none; cursor: pointer;
+  padding: 20px 26px; text-align: left; color: inherit; font: inherit;
+  display: flex; flex-direction: row; align-items: center; gap: 20px;
+}
+.area-card__icon {
+  flex: 0 0 auto;
+  font-size: 1.7rem; line-height: 1;
+  width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--petal), var(--blush));
+}
+.area-card__body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.area-card__title { font-family: var(--font-title); font-size: 1.35rem; color: var(--ink); }
+.area-card__desc { color: var(--ink-soft); font-size: .9rem; line-height: 1.5; }
+.area-card__chevron {
+  flex: 0 0 auto; margin-left: auto; color: var(--rose-deep);
+  transition: transform .3s ease;
+}
+.area-item--open .area-card__chevron { transform: rotate(180deg); }
+
+.area-panel {
+  padding: 6px 26px 26px;
+  animation: area-panel-in .25s ease;
+}
+.area-panel__groups {
+  display: grid; gap: 22px 36px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  padding-top: 20px; border-top: 1px dashed var(--petal);
+}
+.area-panel__cta { margin-top: 24px; }
+@keyframes area-panel-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .area-panel { animation: none; }
+}
+@media (max-width: 520px) {
+  .area-card { padding: 16px 18px; gap: 14px; }
+  .area-card__icon { width: 48px; height: 48px; font-size: 1.4rem; }
+  .area-panel { padding: 4px 18px 20px; }
+}
+
+/* ==== Índice de categorías (Servicios) ==== */
+.cat-index {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+  max-width: 1000px; margin: 0 0 64px;
+}
+.cat-index__chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px; border-radius: var(--radius-full);
+  background: white; box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(217,123,126,0.1);
+  color: var(--ink); font-size: .9rem; font-weight: 500;
+  text-decoration: none; transition: transform .2s, border-color .2s, color .2s;
+}
+.cat-index__chip:hover {
+  transform: translateY(-2px); border-color: var(--rose-deep);
+  color: var(--rose-deep); opacity: 1;
+}
+.cat-index__icon { font-size: 1.05rem; line-height: 1; }
+
+/* ==== Bloque de categoría con listas de texto (Servicios) ==== */
+.cat-block { scroll-margin-top: 90px; margin-bottom: 60px; }
+.cat-block__head {
+  display: flex; align-items: center; gap: 18px;
+  padding-bottom: 18px; margin-bottom: 26px;
+  border-bottom: 1px solid var(--petal);
+}
+.cat-block__icon {
+  flex: 0 0 auto;
+  font-size: 1.8rem; line-height: 1;
+  width: 58px; height: 58px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--petal), var(--blush));
+}
+.cat-block__title { font-family: var(--font-title); font-size: 1.9rem; color: var(--rose-deep); margin-bottom: 2px; }
+.cat-block__desc { color: var(--ink-soft); font-size: .92rem; }
+.cat-block__cta { flex: 0 0 auto; margin-left: auto; align-self: center; }
+@media (max-width: 640px) {
+  .cat-block__head { flex-wrap: wrap; gap: 14px; }
+  .cat-block__cta { margin-left: 0; }
+}
+.cat-block__groups {
+  display: grid; gap: 28px 40px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.serv-group__title {
+  font-family: var(--font-body); font-weight: 600;
+  font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 12px;
+}
+.serv-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; }
+.serv-list__item a {
+  display: block; padding: 7px 12px; border-radius: var(--radius-sm);
+  color: var(--ink); font-size: .95rem; text-decoration: none;
+  transition: background .2s, color .2s, padding .2s;
+}
+.serv-list__item a:hover {
+  background: var(--petal); color: var(--rose-deep);
+  padding-left: 16px; opacity: 1;
+}
+
 /* ==== Grupo categoría con servicios (Servicios page) ==== */
 .cat-group { margin-bottom: 72px; }
 .cat-group__head {
