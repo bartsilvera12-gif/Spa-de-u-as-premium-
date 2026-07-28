@@ -4,6 +4,7 @@ import { ChevronDown } from 'lucide-react'
 import PublicNavbar from '../components/PublicNavbar.jsx'
 import PublicFooter from '../components/PublicFooter.jsx'
 import PromoCard from '../components/PromoCard.jsx'
+import FeatureCarousel from '../components/FeatureCarousel.jsx'
 import { getCategorias, getServicios } from '../lib/services.js'
 import { fallbackGaleria } from '../data/fallbackData.js'
 import { catalogo } from '../data/catalogo.js'
@@ -69,6 +70,19 @@ export default function Home() {
 
       <section className="section">
         <div className="section__head">
+          <div className="section__eyebrow">Explorá</div>
+          <h2 className="section__title">Todas nuestras áreas y servicios</h2>
+          <p className="section__desc">
+            Elegí un área y descubrí todos sus servicios. Reservá el que quieras por WhatsApp.
+          </p>
+        </div>
+        <FeatureCarousel />
+      </section>
+
+      {/* Sección "Áreas" ocultada: su contenido ya está en "Todas nuestras áreas y servicios". */}
+      {false && (
+      <section className="section">
+        <div className="section__head">
           <div className="section__eyebrow">Áreas</div>
           <h2 className="section__title">Todo lo que hacemos por vos</h2>
           <p className="section__desc">
@@ -132,6 +146,7 @@ export default function Home() {
           })}
         </div>
       </section>
+      )}
 
       <section className="carrusel-section">
         <div className="section__head">
