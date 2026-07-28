@@ -101,13 +101,18 @@ export default function Home() {
                         <div key={i} className="serv-group">
                           {g.titulo && <h4 className="serv-group__title">{g.titulo}</h4>}
                           <ul className="serv-list">
-                            {g.servicios.map((s) => (
-                              <li key={s} className="serv-list__item">
-                                <a href={reservaLink(s)} target="_blank" rel="noopener" title={`Reservar ${s}`}>
-                                  {s}
-                                </a>
-                              </li>
-                            ))}
+                            {g.servicios.map((s) => {
+                              const nombre = typeof s === 'string' ? s : s.nombre
+                              const img = typeof s === 'object' ? s.img : null
+                              return (
+                                <li key={nombre} className={`serv-list__item ${img ? 'serv-list__item--img' : ''}`}>
+                                  <a href={reservaLink(nombre)} target="_blank" rel="noopener" title={`Reservar ${nombre}`}>
+                                    {img && <img className="serv-list__thumb" src={img} alt={nombre} loading="lazy" />}
+                                    <span>{nombre}</span>
+                                  </a>
+                                </li>
+                              )
+                            })}
                           </ul>
                         </div>
                       ))}

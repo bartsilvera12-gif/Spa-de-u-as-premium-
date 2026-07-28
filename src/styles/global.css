@@ -483,6 +483,16 @@ a:hover { opacity: .8; }
   background: var(--petal); color: var(--rose-deep);
   padding-left: 16px; opacity: 1;
 }
+/* Item de servicio con miniatura */
+.serv-list__item--img a {
+  display: flex; align-items: center; gap: 12px; padding: 8px;
+}
+.serv-list__item--img a:hover { padding-left: 8px; }
+.serv-list__thumb {
+  width: 56px; height: 56px; flex: 0 0 56px;
+  object-fit: cover; border-radius: var(--radius-sm);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+}
 
 /* ==== Grupo categoría con servicios (Servicios page) ==== */
 .cat-group { margin-bottom: 72px; }

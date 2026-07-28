@@ -7,8 +7,8 @@ export default function PublicFooter() {
       <div className="pub-footer__inner">
         <div className="pub-footer__col">
           <div className="pub-footer__brand">
-            <img className="pub-footer__logo" src="/logo.png" alt="Mabel Beauty & Spa" />
-            <span>Mabel Beauty &amp; Spa</span>
+            <img className="pub-footer__logo" src="/logo.png" alt="Dálida Beauty & Spa" />
+            <span>Dálida Beauty &amp; Spa</span>
           </div>
           <p className="pub-footer__desc">
             Centro de belleza integral premium. Estética facial y corporal, spa,
@@ -39,7 +39,7 @@ export default function PublicFooter() {
         </div>
       </div>
       <div className="pub-footer__bottom">
-        <span>© {new Date().getFullYear()} Mabel Beauty &amp; Spa. Todos los derechos reservados.</span>
+        <span>© {new Date().getFullYear()} Dálida Beauty &amp; Spa. Todos los derechos reservados.</span>
         <span>Desarrollado por <a href="https://neura.com.py" target="_blank" rel="noopener"><strong>NEURA</strong></a></span>
       </div>
     </footer>
