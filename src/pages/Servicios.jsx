@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react'
 import PublicNavbar from '../components/PublicNavbar.jsx'
 import PublicFooter from '../components/PublicFooter.jsx'
 import { MessageCircle } from 'lucide-react'
-import { catalogo } from '../data/catalogo.js'
+import { catalogo as staticCatalogo } from '../data/catalogo.js'
+import { getCatalogo } from '../lib/services.js'
 
 const WHATSAPP = '595982137690'
 
@@ -11,6 +13,13 @@ function reservaLink(nombre) {
 }
 
 export default function Servicios() {
+  const [catalogo, setCatalogo] = useState(staticCatalogo)
+  useEffect(() => {
+    let alive = true
+    getCatalogo().then((c) => { if (alive && Array.isArray(c) && c.length) setCatalogo(c) })
+    return () => { alive = false }
+  }, [])
+
   return (
     <>
       <PublicNavbar />

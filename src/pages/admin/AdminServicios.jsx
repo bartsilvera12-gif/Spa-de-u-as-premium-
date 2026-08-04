@@ -9,7 +9,7 @@ import ConfirmDialog from '../../components/admin/ConfirmDialog.jsx'
 
 const emptyForm = {
   id: null, categoria_id: '', nombre: '', slug: '', descripcion: '',
-  duracion_min: '', precio: 0, precio_anterior: '', precio_desde: false,
+  grupo: '', duracion_min: '', precio: 0, precio_anterior: '', precio_desde: false,
   destacado: false, imagen_url: '', orden: 0, activo: true,
 }
 
@@ -84,6 +84,7 @@ export default function AdminServicios() {
       nombre: form.nombre.trim(),
       slug: form.slug.trim(),
       descripcion: form.descripcion || null,
+      grupo: form.grupo || null,
       duracion_min: form.duracion_min === '' ? null : Number(form.duracion_min),
       precio: Number(form.precio) || 0,
       precio_anterior: form.precio_anterior === '' ? null : Number(form.precio_anterior),
@@ -149,7 +150,7 @@ export default function AdminServicios() {
     { key: 'nombre', label: 'Servicio', render: (r) => (
       <>
         <div style={{ fontWeight: 500 }}>{r.nombre} {r.destacado && <Star size={12} fill="var(--gold)" color="var(--gold)" style={{ marginLeft: 4 }} />}</div>
-        <div style={{ fontSize: '.8rem', color: 'var(--ink-soft)' }}>{r.categoria?.nombre || '—'}</div>
+        <div style={{ fontSize: '.8rem', color: 'var(--ink-soft)' }}>{r.categoria?.nombre || '—'}{r.grupo ? ` · ${r.grupo}` : ''}</div>
       </>
     )},
     { key: 'precio', label: 'Precio', render: (r) => (
@@ -224,6 +225,10 @@ export default function AdminServicios() {
           <div className="form-group">
             <label className="form-label">Orden</label>
             <input className="form-input" type="number" value={form.orden} onChange={(e) => setField('orden', e.target.value)} />
+          </div>
+          <div className="form-group form-group--full">
+            <label className="form-label">Grupo / subgrupo</label>
+            <input className="form-input" placeholder="Ej: Limpiezas faciales (opcional)" value={form.grupo || ''} onChange={(e) => setField('grupo', e.target.value)} />
           </div>
           <div className="form-group form-group--full">
             <label className="form-label">Nombre *</label>

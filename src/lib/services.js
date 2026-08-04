@@ -1,5 +1,6 @@
 import { supabase } from './supabase.js'
 import { fallbackCategorias, fallbackServicios } from '../data/fallbackData.js'
+import { catalogo as fallbackCatalogo } from '../data/catalogo.js'
 
 const TIMEOUT_MS = 6000
 
@@ -61,6 +62,38 @@ export async function getServicios({ soloActivos = true, categoriaId = null } = 
     if (error) throw error
     return data
   }, fallbackServicios)
+}
+
+// Catálogo integral (áreas -> grupos -> servicios) reconstruido desde Supabase.
+// Las áreas del catálogo se distinguen por tener `icono`. Si Supabase no responde
+// o todavía no se corrió la migración, cae al catálogo estático de catalogo.js.
+export async function getCatalogo() {
+  return fetchLive('catalogo', async () => {
+    const [cRes, sRes] = await Promise.all([
+      supabase.from('categorias').select('*').eq('activo', true).order('orden', { ascending: true }),
+      supabase.from('servicios').select('*').eq('activo', true).order('orden', { ascending: true }),
+    ])
+    if (cRes.error) throw cRes.error
+    if (sRes.error) throw sRes.error
+
+    const areas = (cRes.data || []).filter((c) => c.icono) // solo áreas del catálogo nuevo
+    if (!areas.length) throw new Error('catálogo vacío')
+
+    const byCat = {}
+    for (const s of sRes.data || []) (byCat[s.categoria_id] ||= []).push(s)
+
+    return areas.map((a) => {
+      const list = (byCat[a.id] || []).slice().sort((x, y) => (x.orden || 0) - (y.orden || 0))
+      const grupos = []
+      const idx = {}
+      for (const s of list) {
+        const key = s.grupo || ''
+        if (!(key in idx)) { idx[key] = grupos.length; grupos.push({ titulo: s.grupo || undefined, servicios: [] }) }
+        grupos[idx[key]].servicios.push({ nombre: s.nombre, img: s.imagen_url || null })
+      }
+      return { id: a.slug, nombre: a.nombre, icono: a.icono, descripcion: a.descripcion, grupos }
+    })
+  }, fallbackCatalogo)
 }
 
 export async function getServiciosPorCategoria() {

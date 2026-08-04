@@ -7,7 +7,7 @@ import AdminTable from '../../components/admin/AdminTable.jsx'
 import AdminModal from '../../components/admin/AdminModal.jsx'
 import ConfirmDialog from '../../components/admin/ConfirmDialog.jsx'
 
-const emptyForm = { id: null, nombre: '', slug: '', descripcion: '', imagen_url: '', orden: 0, activo: true }
+const emptyForm = { id: null, nombre: '', slug: '', descripcion: '', icono: '', imagen_url: '', orden: 0, activo: true }
 
 export default function AdminCategorias() {
   const [rows, setRows] = useState([])
@@ -67,6 +67,7 @@ export default function AdminCategorias() {
       nombre: form.nombre.trim(),
       slug: form.slug.trim(),
       descripcion: form.descripcion || null,
+      icono: form.icono || null,
       imagen_url: form.imagen_url || null,
       orden: Number(form.orden) || 0,
       activo: !!form.activo,
@@ -120,7 +121,7 @@ export default function AdminCategorias() {
     { key: 'thumb', label: '', render: (r) => <div className="thumb" style={{ backgroundImage: r.imagen_url ? `url(${r.imagen_url})` : 'none' }} /> },
     { key: 'nombre', label: 'Nombre', render: (r) => (
       <>
-        <div style={{ fontWeight: 500 }}>{r.nombre}</div>
+        <div style={{ fontWeight: 500 }}>{r.icono ? `${r.icono} ` : ''}{r.nombre}</div>
         <div style={{ fontSize: '.8rem', color: 'var(--ink-soft)' }}>{r.slug}</div>
       </>
     )},
@@ -182,6 +183,11 @@ export default function AdminCategorias() {
             <label className="form-label">Orden</label>
             <input className="form-input" type="number" value={form.orden} onChange={(e) => setField('orden', e.target.value)} />
             {errors.orden && <div className="form-error">{errors.orden}</div>}
+          </div>
+          <div className="form-group form-group--full">
+            <label className="form-label">Ícono (emoji)</label>
+            <input className="form-input" placeholder="Ej: ✨ (define si es un área del catálogo)" value={form.icono || ''} onChange={(e) => setField('icono', e.target.value)} />
+            <span className="form-hint">Las categorías con ícono aparecen como áreas en el carrusel del catálogo.</span>
           </div>
           <div className="form-group form-group--full">
             <label className="form-label">Descripción</label>

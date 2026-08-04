@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { catalogo } from '../data/catalogo.js'
+import { catalogo as staticCatalogo } from '../data/catalogo.js'
+import { getCatalogo } from '../lib/services.js'
 
 const WHATSAPP = '595982137690'
 const AUTO_PLAY_INTERVAL = 3500
@@ -22,11 +23,18 @@ function cardStatus(index, current, len) {
 }
 
 export default function FeatureCarousel() {
-  const AREAS = catalogo
+  // El catálogo se lee de Supabase (getCatalogo); arranca con el estático para
+  // render inmediato y como fallback si Supabase no responde.
+  const [AREAS, setAREAS] = useState(staticCatalogo)
+  useEffect(() => {
+    let alive = true
+    getCatalogo().then((c) => { if (alive && Array.isArray(c) && c.length) setAREAS(c) })
+    return () => { alive = false }
+  }, [])
 
   // Área seleccionada (panel izquierdo).
   const [areaIndex, setAreaIndex] = useState(0)
-  const area = AREAS[areaIndex]
+  const area = AREAS[areaIndex] || AREAS[0]
 
   // Productos del área seleccionada, aplanados a una lista con imagen opcional.
   const productos = area.grupos.flatMap((g) =>
