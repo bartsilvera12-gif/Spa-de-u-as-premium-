@@ -338,6 +338,9 @@ a:hover { opacity: .8; }
 .carrusel-section {
   padding: clamp(60px, 8vw, 90px) 0 clamp(60px, 8vw, 90px);
   overflow: hidden;
+  background-image: linear-gradient(rgba(255,255,255,0.55), rgba(255,255,255,0.55)), url('/fondo-rosa-2.jpg');
+  background-size: cover;
+  background-position: center;
 }
 .carrusel-section .section__head { padding: 0 20px; margin-bottom: 40px; }
 .carrusel {
@@ -407,7 +410,7 @@ a:hover { opacity: .8; }
 }
 
 /* ==== Testimonios ==== */
-.testimonios { background: rgba(251,235,234,0.55); }
+.testimonios { background: transparent; }
 .testi-grid {
   max-width: 1200px; margin: 0 auto;
   display: grid; gap: 26px;
