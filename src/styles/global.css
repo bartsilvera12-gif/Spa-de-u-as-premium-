@@ -703,14 +703,14 @@ a:hover { opacity: .8; }
   position: relative; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
   padding: 24px; min-height: 300px;
-  background: linear-gradient(160deg, var(--rose-deep), var(--rose-mid));
+  background: linear-gradient(160deg, #A94A5A, #C86970);
 }
 @media (min-width: 900px) {
   .fcar__panel { width: 42%; justify-content: flex-start; padding-left: 48px; }
 }
 .fcar__fade { position: absolute; left: 0; right: 0; height: 70px; z-index: 3; pointer-events: none; }
-.fcar__fade--top { top: 0; background: linear-gradient(to bottom, var(--rose-deep), transparent); }
-.fcar__fade--bottom { bottom: 0; background: linear-gradient(to top, var(--rose-deep), transparent); }
+.fcar__fade--top { top: 0; background: linear-gradient(to bottom, #A94A5A, transparent); }
+.fcar__fade--bottom { bottom: 0; background: linear-gradient(to top, #A94A5A, transparent); }
 
 .fcar__list {
   position: relative; width: 100%; height: 100%;
@@ -733,8 +733,9 @@ a:hover { opacity: .8; }
 }
 .fcar__chip:hover { color: #fff; border-color: rgba(255, 255, 255, 0.5); }
 .fcar__chip--active {
-  background: var(--white); color: var(--rose-deep);
+  background: var(--white); color: var(--ink);
   border-color: var(--white); box-shadow: var(--shadow-sm);
+  font-weight: 600;
 }
 .fcar__chip-icon { flex: 0 0 auto; }
 
