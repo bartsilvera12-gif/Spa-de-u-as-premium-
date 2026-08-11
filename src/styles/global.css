@@ -120,7 +120,7 @@ a:hover { opacity: .8; }
   text-decoration: none; justify-self: center;
 }
 .pub-navbar__logo {
-  width: 120px; height: 120px; border-radius: 50%;
+  width: 160px; height: 160px; border-radius: 50%;
   object-fit: cover; background: white;
   box-shadow: var(--shadow-sm); cursor: pointer;
   transition: transform .3s ease;
