@@ -213,7 +213,7 @@ export default function Home() {
       </section>
 
       {!loading && promos.length > 0 && (
-        <section className="section" style={{ background: 'var(--cream)' }}>
+        <section className="section" style={{ background: 'rgba(252,238,236,0.55)' }}>
           <div className="section__head">
             <div className="section__eyebrow">Promociones</div>
             <h2 className="section__title">Combos y packs especiales</h2>
