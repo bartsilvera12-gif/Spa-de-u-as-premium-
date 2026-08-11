@@ -485,13 +485,22 @@ a:hover { opacity: .8; }
 }
 /* Item de servicio con miniatura */
 .serv-list__item--img a {
-  display: flex; align-items: center; gap: 12px; padding: 8px;
+  display: flex; align-items: center; gap: 16px; padding: 10px;
+  font-size: 1rem;
 }
-.serv-list__item--img a:hover { padding-left: 8px; }
+.serv-list__item--img a:hover { padding-left: 10px; }
 .serv-list__thumb {
-  width: 56px; height: 56px; flex: 0 0 56px;
-  object-fit: cover; border-radius: var(--radius-sm);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+  width: 88px; height: 88px; flex: 0 0 88px;
+  object-fit: cover; border-radius: var(--radius-md);
+  box-shadow: 0 4px 14px rgba(83, 58, 61, .12);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.serv-list__item--img a:hover .serv-list__thumb {
+  transform: scale(1.06);
+  box-shadow: 0 8px 22px rgba(217, 123, 126, .22);
+}
+@media (max-width: 640px) {
+  .serv-list__thumb { width: 72px; height: 72px; flex-basis: 72px; }
 }
 
 /* ==== Grupo categoría con servicios (Servicios page) ==== */
