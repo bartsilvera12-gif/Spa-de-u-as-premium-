@@ -200,7 +200,7 @@ export const catalogo = [
     icono: '⭐',
     descripcion: 'Membresías, atención exclusiva y beneficios pensados para vos.',
     grupos: [
-      { servicios: [{ nombre: 'Membresías', img: '/servicios/vip-membresias.jpg' }, { nombre: 'Gift Cards', img: '/servicios/vip-gift-cards.jpg' }, { nombre: 'Paquetes mensuales', img: '/servicios/vip-paquetes-mensuales.jpg' }, { nombre: 'Planes anuales', img: '/servicios/vip-planes-anuales.jpg' }, { nombre: 'Concierge de belleza', img: '/servicios/vip-concierge-belleza.jpg' }, 'Beauty Coach', 'Diagnóstico facial digital', 'Diagnóstico corporal', 'Seguimiento personalizado', 'Cabinas privadas VIP', 'Servicio a domicilio', 'Atención para eventos'] },
+      { servicios: [{ nombre: 'Membresías', img: '/servicios/vip-membresias.jpg' }, { nombre: 'Gift Cards', img: '/servicios/vip-gift-cards.jpg' }, { nombre: 'Paquetes mensuales', img: '/servicios/vip-paquetes-mensuales.jpg' }, { nombre: 'Planes anuales', img: '/servicios/vip-planes-anuales.jpg' }, { nombre: 'Concierge de belleza', img: '/servicios/vip-concierge-belleza.jpg' }, { nombre: 'Beauty Coach', img: '/servicios/vip-beauty-coach.jpg' }, 'Diagnóstico facial digital', 'Diagnóstico corporal', 'Seguimiento personalizado', 'Cabinas privadas VIP', 'Servicio a domicilio', 'Atención para eventos'] },
     ],
   },
 ]
