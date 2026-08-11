@@ -41,11 +41,11 @@ export default function PublicNavbar() {
             href="https://wa.me/595982137690"
             target="_blank"
             rel="noopener"
-            className="pub-navbar__icon"
-            aria-label="WhatsApp"
-            title="WhatsApp"
+            className="pub-navbar__cta"
+            aria-label="Reservar por WhatsApp"
           >
-            <MessageCircle size={20} strokeWidth={1.7} />
+            <MessageCircle size={20} strokeWidth={2} />
+            <span>Reservar</span>
           </a>
           <a
             href="https://instagram.com"
@@ -55,7 +55,7 @@ export default function PublicNavbar() {
             aria-label="Instagram"
             title="Instagram"
           >
-            <Instagram size={20} strokeWidth={1.7} />
+            <Instagram size={22} strokeWidth={1.7} />
           </a>
           <button
             className="pub-navbar__toggle"
