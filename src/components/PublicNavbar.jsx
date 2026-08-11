@@ -23,7 +23,7 @@ export default function PublicNavbar() {
   return (
     <>
     <header className="pub-navbar">
-      {/* Fila 1: logo centrado + iconos a la derecha */}
+      {/* Fila 1: logo centrado con hamburguesa en mobile */}
       <div className="pub-navbar__top">
         <div className="pub-navbar__side" />
         <Link to="/" className="pub-navbar__brand" onClick={close}>
@@ -37,26 +37,6 @@ export default function PublicNavbar() {
           <span className="pub-navbar__brand-name">Dálida Beauty &amp; Spa</span>
         </Link>
         <div className="pub-navbar__side pub-navbar__side--right">
-          <a
-            href="https://wa.me/595982137690"
-            target="_blank"
-            rel="noopener"
-            className="pub-navbar__cta"
-            aria-label="Reservar por WhatsApp"
-          >
-            <MessageCircle size={20} strokeWidth={2} />
-            <span>Reservar</span>
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener"
-            className="pub-navbar__icon"
-            aria-label="Instagram"
-            title="Instagram"
-          >
-            <Instagram size={22} strokeWidth={1.7} />
-          </a>
           <button
             className="pub-navbar__toggle"
             onClick={() => setOpen((o) => !o)}
@@ -67,14 +47,37 @@ export default function PublicNavbar() {
         </div>
       </div>
 
-      {/* Fila 2: menú horizontal con underline animado */}
+      {/* Fila 2: menú horizontal + botones Reservar / Instagram */}
       <nav className={`pub-navbar__nav ${open ? 'pub-navbar__nav--open' : ''}`}>
         <ul className="pub-navbar__menu">
           <li><NavLink to="/" end onClick={close}>Inicio</NavLink></li>
           <li><NavLink to="/servicios" onClick={close}>Servicios</NavLink></li>
           <li><NavLink to="/promociones" onClick={close}>Promociones</NavLink></li>
           <li><NavLink to="/galeria" onClick={close}>Galería</NavLink></li>
-          <li><a href="https://wa.me/595982137690" target="_blank" rel="noopener">Reservar</a></li>
+          <li>
+            <a
+              href="https://wa.me/595982137690"
+              target="_blank"
+              rel="noopener"
+              className="pub-navbar__cta"
+              onClick={close}
+            >
+              <MessageCircle size={18} strokeWidth={2} />
+              <span>Reservar</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener"
+              className="pub-navbar__cta pub-navbar__cta--alt"
+              onClick={close}
+            >
+              <Instagram size={18} strokeWidth={2} />
+              <span>Instagram</span>
+            </a>
+          </li>
         </ul>
       </nav>
     </header>
