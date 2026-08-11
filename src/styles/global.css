@@ -107,8 +107,8 @@ a:hover { opacity: .8; }
 /* Fila superior: logo centrado, iconos a los costados */
 .pub-navbar__top {
   display: grid; grid-template-columns: 1fr auto 1fr;
-  align-items: center; gap: 16px;
-  padding: 18px 28px; max-width: 1400px; margin: 0 auto;
+  align-items: center; gap: 20px;
+  padding: 28px 32px; max-width: 1500px; margin: 0 auto;
 }
 .pub-navbar__side {
   display: flex; align-items: center; gap: 8px; min-width: 0;
@@ -120,18 +120,18 @@ a:hover { opacity: .8; }
   text-decoration: none; justify-self: center;
 }
 .pub-navbar__logo {
-  width: 60px; height: 60px; border-radius: 50%;
+  width: 84px; height: 84px; border-radius: 50%;
   object-fit: cover; background: white;
   box-shadow: var(--shadow-sm); cursor: pointer;
   transition: transform .3s ease;
 }
 .pub-navbar__logo:hover { transform: scale(1.04); }
 .pub-navbar__brand-name {
-  font-size: 1.55rem; letter-spacing: .02em; line-height: 1;
+  font-size: 2rem; letter-spacing: .02em; line-height: 1;
   color: var(--ink);
 }
 .pub-navbar__icon {
-  width: 40px; height: 40px; border-radius: 50%;
+  width: 46px; height: 46px; border-radius: 50%;
   display: inline-flex; align-items: center; justify-content: center;
   color: var(--ink); text-decoration: none;
   transition: background .2s, color .2s;
@@ -143,16 +143,16 @@ a:hover { opacity: .8; }
   border-top: 1px solid rgba(217,123,126,0.08);
 }
 .pub-navbar__menu {
-  display: flex; gap: 40px; align-items: center; list-style: none;
+  display: flex; gap: 52px; align-items: center; list-style: none;
   justify-content: center;
-  padding: 10px 20px;
-  max-width: 1400px; margin: 0 auto;
+  padding: 16px 24px;
+  max-width: 1500px; margin: 0 auto;
 }
 .pub-navbar__menu a {
   position: relative;
-  color: var(--ink); font-weight: 500; font-size: .95rem;
-  letter-spacing: .04em; text-transform: uppercase;
-  padding: 10px 4px; text-decoration: none;
+  color: var(--ink); font-weight: 500; font-size: 1.05rem;
+  letter-spacing: .06em; text-transform: uppercase;
+  padding: 12px 6px; text-decoration: none;
   transition: color .2s;
 }
 .pub-navbar__menu a::after {
@@ -173,9 +173,9 @@ a:hover { opacity: .8; }
   cursor: pointer; padding: 4px;
 }
 @media (max-width: 820px) {
-  .pub-navbar__top { grid-template-columns: 1fr auto 1fr; padding: 14px 16px; }
+  .pub-navbar__top { grid-template-columns: 1fr auto 1fr; padding: 16px 16px; }
   .pub-navbar__brand-name { display: none; }
-  .pub-navbar__logo { width: 48px; height: 48px; }
+  .pub-navbar__logo { width: 60px; height: 60px; }
   .pub-navbar__nav { display: none; }
   .pub-navbar__nav--open { display: block; }
   .pub-navbar__nav--open .pub-navbar__menu {
@@ -732,9 +732,14 @@ a:hover { opacity: .8; }
   transition: all 0.4s ease;
 }
 .fcar__chip:hover { color: #fff; border-color: rgba(255, 255, 255, 0.5); }
-.fcar__chip--active {
-  background: var(--white); color: var(--ink);
-  border-color: var(--white); box-shadow: var(--shadow-sm);
+.fcar__chip--active,
+.fcar__chip--active:hover,
+.fcar__chip--active:focus,
+.fcar__chip--active:active {
+  background: var(--white) !important;
+  color: var(--ink) !important;
+  border-color: var(--white) !important;
+  box-shadow: var(--shadow-sm);
   font-weight: 600;
 }
 .fcar__chip-icon { flex: 0 0 auto; }
