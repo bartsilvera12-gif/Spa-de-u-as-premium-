@@ -152,12 +152,10 @@ a:hover { opacity: .8; }
 }
 .pub-navbar__cta::after { display: none !important; }
 .pub-navbar__cta--alt {
-  background: white; color: var(--ink) !important;
-  border: 1.5px solid var(--rose);
+  background: var(--rose-deep); color: white !important;
 }
 .pub-navbar__cta--alt:hover {
-  background: var(--petal); color: var(--rose-deep) !important;
-  border-color: var(--rose-deep);
+  background: #C86970; color: white !important;
 }
 @media (max-width: 640px) {
   .pub-navbar__cta { padding: 8px 14px; font-size: .82rem; gap: 6px; }
