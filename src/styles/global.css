@@ -57,6 +57,42 @@ a:hover { opacity: .8; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
 /* ==== Navbar público ==== */
+/* ==== Barra de anuncios (arriba del navbar) ==== */
+.ann-bar {
+  background: linear-gradient(90deg, var(--petal), var(--blush), var(--petal));
+  color: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  gap: 20px; padding: 8px 16px;
+  font-size: .88rem; font-weight: 500;
+  border-bottom: 1px solid rgba(217,123,126,0.12);
+  position: relative; z-index: 41;
+}
+.ann-bar__stage {
+  position: relative; flex: 0 1 auto; min-width: 0;
+  min-height: 22px; display: flex; align-items: center; justify-content: center;
+  max-width: 720px;
+}
+.ann-bar__msg {
+  position: absolute; left: 0; right: 0; text-align: center;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity .5s ease, transform .5s ease;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  padding: 0 8px;
+}
+.ann-bar__msg--active { opacity: 1; transform: translateY(0); }
+.ann-bar__arrow {
+  background: transparent; border: none; cursor: pointer;
+  width: 28px; height: 28px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink); transition: background .2s, color .2s;
+  flex: 0 0 auto;
+}
+.ann-bar__arrow:hover { background: rgba(255,255,255,0.5); color: var(--rose-deep); }
+@media (max-width: 640px) {
+  .ann-bar { padding: 6px 8px; font-size: .78rem; gap: 8px; }
+  .ann-bar__arrow { width: 24px; height: 24px; }
+}
+
 .pub-navbar {
   position: sticky; top: 0; z-index: 40;
   background: rgba(253,243,242,0.9);

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
+import AnnouncementBar from './AnnouncementBar.jsx'
 
 export default function PublicNavbar() {
   const [open, setOpen] = useState(false)
@@ -22,6 +23,7 @@ export default function PublicNavbar() {
 
   return (
     <>
+    <AnnouncementBar />
     <nav className="pub-navbar">
       <div className="pub-navbar__inner">
         <Link to="/" className="pub-navbar__brand" onClick={close}>
