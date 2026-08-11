@@ -188,7 +188,7 @@ a:hover { opacity: .8; }
 .hero {
   position: relative; overflow: hidden;
   padding: clamp(60px, 12vw, 140px) 20px;
-  background: linear-gradient(135deg, rgba(251,235,234,0.55), rgba(249,226,225,0.55));
+  background: transparent;
 }
 .hero__inner {
   max-width: 1200px; margin: 0 auto;
@@ -338,9 +338,6 @@ a:hover { opacity: .8; }
 .carrusel-section {
   padding: clamp(60px, 8vw, 90px) 0 clamp(60px, 8vw, 90px);
   overflow: hidden;
-  background-image: linear-gradient(rgba(255,255,255,0.55), rgba(255,255,255,0.55)), url('/fondo-rosa-2.jpg');
-  background-size: cover;
-  background-position: center;
 }
 .carrusel-section .section__head { padding: 0 20px; margin-bottom: 40px; }
 .carrusel {

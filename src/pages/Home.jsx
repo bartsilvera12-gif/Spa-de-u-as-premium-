@@ -213,14 +213,7 @@ export default function Home() {
       </section>
 
       {!loading && promos.length > 0 && (
-        <section
-          className="section"
-          style={{
-            backgroundImage: "linear-gradient(rgba(255,255,255,0.55), rgba(255,255,255,0.55)), url('/fondo-rosa-2.jpg')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        >
+        <section className="section">
           <div className="section__head">
             <div className="section__eyebrow">Promociones</div>
             <h2 className="section__title">Combos y packs especiales</h2>
