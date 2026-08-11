@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import { Menu, X } from 'lucide-react'
-import AnnouncementBar from './AnnouncementBar.jsx'
+import { Menu, X, MessageCircle, Instagram } from 'lucide-react'
 
 export default function PublicNavbar() {
   const [open, setOpen] = useState(false)
@@ -23,9 +22,10 @@ export default function PublicNavbar() {
 
   return (
     <>
-    <AnnouncementBar />
-    <nav className="pub-navbar">
-      <div className="pub-navbar__inner">
+    <header className="pub-navbar">
+      {/* Fila 1: logo centrado + iconos a la derecha */}
+      <div className="pub-navbar__top">
+        <div className="pub-navbar__side" />
         <Link to="/" className="pub-navbar__brand" onClick={close}>
           <img
             className="pub-navbar__logo"
@@ -34,20 +34,50 @@ export default function PublicNavbar() {
             onClick={openLogo}
             title="Ver logo"
           />
-          <span>Dálida Beauty &amp; Spa</span>
+          <span className="pub-navbar__brand-name">Dálida Beauty &amp; Spa</span>
         </Link>
-        <ul className={`pub-navbar__menu ${open ? 'pub-navbar__menu--open' : ''}`}>
+        <div className="pub-navbar__side pub-navbar__side--right">
+          <a
+            href="https://wa.me/595982137690"
+            target="_blank"
+            rel="noopener"
+            className="pub-navbar__icon"
+            aria-label="WhatsApp"
+            title="WhatsApp"
+          >
+            <MessageCircle size={20} strokeWidth={1.7} />
+          </a>
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener"
+            className="pub-navbar__icon"
+            aria-label="Instagram"
+            title="Instagram"
+          >
+            <Instagram size={20} strokeWidth={1.7} />
+          </a>
+          <button
+            className="pub-navbar__toggle"
+            onClick={() => setOpen((o) => !o)}
+            aria-label="Menú"
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Fila 2: menú horizontal con underline animado */}
+      <nav className={`pub-navbar__nav ${open ? 'pub-navbar__nav--open' : ''}`}>
+        <ul className="pub-navbar__menu">
           <li><NavLink to="/" end onClick={close}>Inicio</NavLink></li>
           <li><NavLink to="/servicios" onClick={close}>Servicios</NavLink></li>
           <li><NavLink to="/promociones" onClick={close}>Promociones</NavLink></li>
           <li><NavLink to="/galeria" onClick={close}>Galería</NavLink></li>
           <li><a href="https://wa.me/595982137690" target="_blank" rel="noopener">Reservar</a></li>
         </ul>
-        <button className="pub-navbar__toggle" onClick={() => setOpen((o) => !o)} aria-label="Menú">
-          {open ? <X size={26} /> : <Menu size={26} />}
-        </button>
-      </div>
-    </nav>
+      </nav>
+    </header>
 
     {showLogo && (
       <div className="lightbox" onClick={() => setShowLogo(false)}>
