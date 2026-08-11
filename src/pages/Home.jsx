@@ -29,7 +29,26 @@ export default function Home() {
   const [promos, setPromos] = useState([])
   const [loading, setLoading] = useState(true)
   const [abierta, setAbierta] = useState(null)
-  const carruselImgs = useMemo(() => shuffle(fallbackGaleria).slice(0, 14), [])
+  // Fuente del carrusel: galería fija + todas las imágenes de servicios del catálogo.
+  const carruselImgs = useMemo(() => {
+    const desdeCatalogo = catalogo.flatMap((area) =>
+      (area.grupos || []).flatMap((g) =>
+        (g.servicios || [])
+          .map((s) => (typeof s === 'string' ? null : s?.img))
+          .filter(Boolean)
+          .map((img) => ({ src: img, categoria: area.nombre }))
+      )
+    )
+    const combinadas = [...fallbackGaleria, ...desdeCatalogo]
+    // Deduplicar por src.
+    const vistos = new Set()
+    const unicas = combinadas.filter((x) => {
+      if (vistos.has(x.src)) return false
+      vistos.add(x.src)
+      return true
+    })
+    return shuffle(unicas).slice(0, 30)
+  }, [])
 
   useEffect(() => {
     (async () => {
