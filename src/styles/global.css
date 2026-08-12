@@ -288,6 +288,7 @@ a:hover { opacity: .8; }
 .section__head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
 .section__eyebrow {
   display: inline-block;
+  position: relative;
   color: var(--rose-deep); font-size: .82rem; letter-spacing: .18em;
   text-transform: uppercase; font-weight: 600; margin-bottom: 14px;
   background: white;
@@ -295,8 +296,33 @@ a:hover { opacity: .8; }
   border-radius: var(--radius-full);
   box-shadow: 0 4px 14px rgba(83, 58, 61, .08);
 }
+/* Flourish ornamental a cada lado del eyebrow (a juego con el separador) */
+.section__eyebrow::before, .section__eyebrow::after {
+  content: ""; position: absolute; top: 50%;
+  width: 46px; height: 20px;
+  background: center / contain no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='20' viewBox='0 0 46 20' fill='none' stroke='%23C37E98' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 11 H22'/%3E%3Cpath d='M22 11 C 31 11 31 5 36 6 C 41 7 40 15 34 14 C 30 13.3 31 8 36 9'/%3E%3C/svg%3E");
+}
+.section__eyebrow::before { right: 100%; margin-right: 14px; transform: translateY(-50%); }
+.section__eyebrow::after  { left: 100%;  margin-left: 14px;  transform: translateY(-50%) scaleX(-1); }
+/* Los eyebrows alineados a la izquierda no llevan flourish (se saldrían del borde) */
+.experiencia .section__eyebrow::before, .experiencia .section__eyebrow::after,
+.cta-banner .section__eyebrow::before, .cta-banner .section__eyebrow::after { content: none; }
+@media (max-width: 420px) {
+  .section__eyebrow::before, .section__eyebrow::after { width: 34px; margin: 0 8px; }
+  .section__eyebrow::before { margin-right: 8px; }
+  .section__eyebrow::after { margin-left: 8px; }
+}
 .section__title { margin-bottom: 14px; }
 .section__desc { color: var(--ink-soft); font-size: 1.05rem; }
+
+/* Separador ornamental entre secciones (un solo SVG: adorno + línea, de lado a lado) */
+.section-divider {
+  width: 100%;
+  margin: clamp(-6px, -1vw, 2px) auto;
+  pointer-events: none;
+}
+.section-divider__img { display: block; width: 100%; height: auto; }
 
 /* ==== Cards ==== */
 .cat-grid, .serv-grid {

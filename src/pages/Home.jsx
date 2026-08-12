@@ -5,6 +5,7 @@ import PublicNavbar from '../components/PublicNavbar.jsx'
 import PublicFooter from '../components/PublicFooter.jsx'
 import PromoCard from '../components/PromoCard.jsx'
 import FeatureCarousel from '../components/FeatureCarousel.jsx'
+import SectionDivider from '../components/SectionDivider.jsx'
 import { getCategorias, getServicios } from '../lib/services.js'
 import { fallbackGaleria } from '../data/fallbackData.js'
 import { catalogo } from '../data/catalogo.js'
@@ -98,6 +99,8 @@ export default function Home() {
         <FeatureCarousel />
       </section>
 
+      <SectionDivider />
+
       {/* Sección "Áreas" ocultada: su contenido ya está en "Todas nuestras áreas y servicios". */}
       {false && (
       <section className="section">
@@ -186,6 +189,8 @@ export default function Home() {
         </div>
       </section>
 
+      <SectionDivider />
+
       <section className="section experiencia">
         <div className="experiencia__inner">
           <div className="experiencia__image" style={{ backgroundImage: 'url(/experiencia.jpg)' }} />
@@ -212,6 +217,8 @@ export default function Home() {
         </div>
       </section>
 
+      <SectionDivider />
+
       {!loading && promos.length > 0 && (
         <section className="section">
           <div className="section__head">
@@ -234,6 +241,8 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      {!loading && promos.length > 0 && <SectionDivider />}
 
       <section className="section testimonios">
         <div className="section__head">

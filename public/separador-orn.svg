@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 160" width="1600" height="160">
+  <defs><linearGradient id="l" x1="0" y1="0" x2="1600" y2="0" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#C37E98" stop-opacity="0"/><stop offset="0.16" stop-color="#C37E98" stop-opacity="1"/>
+    <stop offset="0.84" stop-color="#C37E98" stop-opacity="1"/><stop offset="1" stop-color="#C37E98" stop-opacity="0"/></linearGradient></defs>
+  <line x1="20" y1="140" x2="1580" y2="140" stroke="url(#l)" stroke-width="1.4"/>
+  <line x1="20" y1="144" x2="1580" y2="144" stroke="url(#l)" stroke-width="0.9" opacity="0.7"/>
+  <g fill="none" stroke="#C37E98" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    
+  <path d="M800 140 C 786 118 788 96 800 82 C 812 96 814 118 800 140"/>
+  <path d="M800 140 C 780 128 772 112 776 98 C 792 104 796 122 800 140"/>
+  <path d="M800 140 C 820 128 828 112 824 98 C 808 104 804 122 800 140"/>
+  <circle cx="800" cy="76" r="3" fill="#C37E98" stroke="none"/>
+
+    <g>
+  <!-- voluta acanto principal (sube a espiral) -->
+  <path d="M804 140 C 850 140 850 100 886 104 C 910 107 908 130 888 128 C 874 127 879 111 892 116"/>
+  <!-- voluta exterior/hoja que apoya en la base -->
+  <path d="M892 118 C 920 130 940 140 966 140 C 988 140 991 122 972 121 C 960 120 964 133 976 131"/>
+  <!-- hoja/petalo interior junto al centro -->
+  <path d="M806 140 C 826 138 834 124 828 110 C 824 101 812 100 810 110"/>
+  <!-- puntos decorativos -->
+  <circle cx="892" cy="116" r="2.4" fill="#C37E98" stroke="none"/>
+</g><g transform="translate(1600,0) scale(-1,1)">
+  <!-- voluta acanto principal (sube a espiral) -->
+  <path d="M804 140 C 850 140 850 100 886 104 C 910 107 908 130 888 128 C 874 127 879 111 892 116"/>
+  <!-- voluta exterior/hoja que apoya en la base -->
+  <path d="M892 118 C 920 130 940 140 966 140 C 988 140 991 122 972 121 C 960 120 964 133 976 131"/>
+  <!-- hoja/petalo interior junto al centro -->
+  <path d="M806 140 C 826 138 834 124 828 110 C 824 101 812 100 810 110"/>
+  <!-- puntos decorativos -->
+  <circle cx="892" cy="116" r="2.4" fill="#C37E98" stroke="none"/>
+</g>
+  </g>
+</svg>
