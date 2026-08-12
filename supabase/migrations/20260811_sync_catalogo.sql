@@ -320,6 +320,19 @@ on conflict (slug) do update set
   orden = excluded.orden,
   activo = true;
 
--- 4) Verificación
+-- 4) Limpieza del catálogo viejo (REEMPLAZO)
+-- Las áreas del catálogo nuevo tienen `icono`. Todo lo que NO cuelgue de un área
+-- con ícono es catálogo viejo (import previo) y se elimina para que el admin
+-- quede idéntico a la web pública. Primero los servicios (FK), luego las categorías.
+delete from spanails.servicios s
+where not exists (
+  select 1 from spanails.categorias c
+  where c.id = s.categoria_id and c.icono is not null
+);
+
+delete from spanails.categorias
+where icono is null;
+
+-- 5) Verificación
 select count(*) as categorias from spanails.categorias where icono is not null;
 select count(*) as servicios from spanails.servicios;
