@@ -88,6 +88,8 @@ export default function Home() {
         </div>
       </section>
 
+      <SectionDivider />
+
       <section className="section">
         <div className="section__head">
           <div className="section__eyebrow">Explorá</div>
