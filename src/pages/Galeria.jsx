@@ -1,11 +1,41 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { X } from 'lucide-react'
 import PublicNavbar from '../components/PublicNavbar.jsx'
 import PublicFooter from '../components/PublicFooter.jsx'
 import { fallbackGaleria } from '../data/fallbackData.js'
+import { catalogo } from '../data/catalogo.js'
+
+function shuffle(arr) {
+  const a = arr.slice()
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
 
 export default function Galeria() {
   const [lightbox, setLightbox] = useState(null)
+
+  // Todas las imágenes: galería fija + todas las fotos del catálogo, sin duplicados y en orden aleatorio.
+  const imagenes = useMemo(() => {
+    const desdeCatalogo = catalogo.flatMap((area) =>
+      (area.grupos || []).flatMap((g) =>
+        (g.servicios || [])
+          .map((s) => (typeof s === 'string' ? null : s?.img))
+          .filter(Boolean)
+          .map((img) => ({ src: img, categoria: area.nombre }))
+      )
+    )
+    const todas = [...fallbackGaleria, ...desdeCatalogo]
+    const vistos = new Set()
+    const unicas = todas.filter((x) => {
+      if (vistos.has(x.src)) return false
+      vistos.add(x.src)
+      return true
+    })
+    return shuffle(unicas)
+  }, [])
 
   return (
     <>
@@ -18,14 +48,15 @@ export default function Galeria() {
         </div>
 
         <div className="gal-grid">
-          {fallbackGaleria.map((img) => (
+          {imagenes.map((img) => (
             <button
               key={img.src}
               className="gal-item"
-              style={{ backgroundImage: `url(${img.src})` }}
               aria-label={img.categoria}
               onClick={() => setLightbox(img.src)}
-            />
+            >
+              <img className="gal-item__img" src={img.src} alt={img.categoria} loading="lazy" />
+            </button>
           ))}
         </div>
       </section>
