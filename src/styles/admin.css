@@ -133,6 +133,17 @@
 .form-input:focus, .form-textarea:focus, .form-select:focus {
   outline: none; border-color: var(--rose-deep); background: white;
 }
+.input-with-action { position: relative; display: flex; align-items: center; }
+.input-with-action .form-input { padding-right: 46px; }
+.input-action-btn {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; padding: 0; border: none; background: transparent;
+  color: var(--ink-soft); cursor: pointer; border-radius: var(--radius-sm);
+  transition: color .2s, background .2s;
+}
+.input-action-btn:hover { color: var(--rose-deep); background: var(--petal); }
+.input-action-btn:focus-visible { outline: 2px solid var(--rose-deep); outline-offset: 1px; }
 .form-textarea { resize: vertical; min-height: 100px; }
 .form-hint { font-size: .78rem; color: var(--ink-soft); }
 .form-error { font-size: .85rem; color: #b0525b; margin-top: 4px; }
