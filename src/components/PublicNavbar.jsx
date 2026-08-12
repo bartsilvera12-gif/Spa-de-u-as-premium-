@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import { Menu, X, MessageCircle, Instagram } from 'lucide-react'
+import { Menu, X, Instagram } from 'lucide-react'
+import WhatsappIcon from './WhatsappIcon.jsx'
 
 export default function PublicNavbar() {
   const [open, setOpen] = useState(false)
@@ -51,7 +52,7 @@ export default function PublicNavbar() {
                 className="pub-navbar__cta"
                 onClick={close}
               >
-                <MessageCircle size={18} strokeWidth={2} />
+                <WhatsappIcon size={18} />
                 <span>Reservar</span>
               </a>
             </li>

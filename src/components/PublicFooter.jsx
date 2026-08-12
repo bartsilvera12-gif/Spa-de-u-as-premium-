@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom'
-import { MessageCircle, Instagram, MapPin } from 'lucide-react'
+import { Instagram, MapPin } from 'lucide-react'
+import WhatsappIcon from './WhatsappIcon.jsx'
+import WhatsappFloat from './WhatsappFloat.jsx'
 
 export default function PublicFooter() {
   return (
     <footer className="pub-footer">
+      <WhatsappFloat />
       <div className="pub-footer__inner">
         <div className="pub-footer__col">
           <div className="pub-footer__brand">
@@ -28,7 +31,7 @@ export default function PublicFooter() {
         <div className="pub-footer__col">
           <h4>Contacto</h4>
           <a href="https://wa.me/595982137690" target="_blank" rel="noopener">
-            <MessageCircle size={16} /> WhatsApp
+            <WhatsappIcon size={16} /> WhatsApp
           </a>
           <a href="https://instagram.com" target="_blank" rel="noopener">
             <Instagram size={16} /> Instagram
