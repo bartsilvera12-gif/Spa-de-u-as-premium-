@@ -13,7 +13,7 @@ export default function AdminSidebar({ onLogout }) {
       <div className="admin-sidebar__brand">
         <img className="admin-sidebar__logo" src="/logo.png" alt="Dálida Beauty & Spa" />
         <div className="admin-sidebar__brand-text">
-          Spa de Uñas
+          Dálida
           <small>Panel administrativo</small>
         </div>
       </div>
