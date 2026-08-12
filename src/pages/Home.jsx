@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronDown } from 'lucide-react'
 import PublicNavbar from '../components/PublicNavbar.jsx'
@@ -6,7 +6,8 @@ import PublicFooter from '../components/PublicFooter.jsx'
 import PromoCard from '../components/PromoCard.jsx'
 import FeatureCarousel from '../components/FeatureCarousel.jsx'
 import SectionDivider from '../components/SectionDivider.jsx'
-import { getCategorias, getServicios } from '../lib/services.js'
+import { getCategorias, getServicios, invalidateCache } from '../lib/services.js'
+import { useLiveRefetch } from '../lib/useLiveRefetch.js'
 import { fallbackGaleria } from '../data/fallbackData.js'
 import { catalogo } from '../data/catalogo.js'
 
@@ -51,15 +52,16 @@ export default function Home() {
     return shuffle(unicas).slice(0, 30)
   }, [])
 
-  useEffect(() => {
-    (async () => {
-      const [cats, servs] = await Promise.all([getCategorias(), getServicios()])
-      const promoCat = cats.find((c) => c.slug === 'promociones')
-      const promoList = promoCat ? servs.filter((s) => s.categoria_id === promoCat.id) : []
-      setPromos(promoList.slice(0, 4))
-      setLoading(false)
-    })()
+  const cargarPromos = useCallback(async () => {
+    invalidateCache()
+    const [cats, servs] = await Promise.all([getCategorias(), getServicios()])
+    const promoCat = cats.find((c) => c.slug === 'promociones')
+    const promoList = promoCat ? servs.filter((s) => s.categoria_id === promoCat.id) : []
+    setPromos(promoList.slice(0, 4))
+    setLoading(false)
   }, [])
+  useEffect(() => { cargarPromos() }, [cargarPromos])
+  useLiveRefetch(cargarPromos)   // refresca al volver a la pestaña
 
   return (
     <>

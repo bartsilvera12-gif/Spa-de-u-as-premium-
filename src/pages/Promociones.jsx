@@ -1,21 +1,23 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import PublicNavbar from '../components/PublicNavbar.jsx'
 import PublicFooter from '../components/PublicFooter.jsx'
 import PromoCard from '../components/PromoCard.jsx'
-import { getCategorias, getServicios } from '../lib/services.js'
+import { getCategorias, getServicios, invalidateCache } from '../lib/services.js'
+import { useLiveRefetch } from '../lib/useLiveRefetch.js'
 
 export default function Promociones() {
   const [promos, setPromos] = useState([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    (async () => {
-      const [cats, servs] = await Promise.all([getCategorias(), getServicios()])
-      const promoCat = cats.find((c) => c.slug === 'promociones')
-      setPromos(promoCat ? servs.filter((s) => s.categoria_id === promoCat.id) : [])
-      setLoading(false)
-    })()
+  const cargar = useCallback(async () => {
+    invalidateCache()
+    const [cats, servs] = await Promise.all([getCategorias(), getServicios()])
+    const promoCat = cats.find((c) => c.slug === 'promociones')
+    setPromos(promoCat ? servs.filter((s) => s.categoria_id === promoCat.id) : [])
+    setLoading(false)
   }, [])
+  useEffect(() => { cargar() }, [cargar])
+  useLiveRefetch(cargar)   // refresca al volver a la pestaña
 
   return (
     <>
