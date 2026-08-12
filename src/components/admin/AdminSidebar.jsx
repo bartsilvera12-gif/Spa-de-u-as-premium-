@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { LayoutDashboard, FolderHeart, Sparkles, ExternalLink, LogOut } from 'lucide-react'
+import { LayoutDashboard, FolderHeart, Sparkles, Gift, ExternalLink, LogOut } from 'lucide-react'
 import { supabase } from '../../lib/supabase.js'
 
 export default function AdminSidebar({ onLogout }) {
@@ -26,6 +26,9 @@ export default function AdminSidebar({ onLogout }) {
       </NavLink>
       <NavLink to="/admin/servicios" className={({ isActive }) => 'admin-sidebar__link' + (isActive ? ' active' : '')}>
         <Sparkles size={18} /> Servicios
+      </NavLink>
+      <NavLink to="/admin/promociones" className={({ isActive }) => 'admin-sidebar__link' + (isActive ? ' active' : '')}>
+        <Gift size={18} /> Promociones
       </NavLink>
 
       <div className="admin-sidebar__foot">

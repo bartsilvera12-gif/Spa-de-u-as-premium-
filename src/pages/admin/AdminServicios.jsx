@@ -13,7 +13,7 @@ const emptyForm = {
   destacado: false, imagen_url: '', orden: 0, activo: true,
 }
 
-export default function AdminServicios() {
+export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Servicios', ctaLabel = 'Nuevo servicio' } = {}) {
   const [rows, setRows] = useState([])
   const [categorias, setCategorias] = useState([])
   const [loading, setLoading] = useState(true)
@@ -32,7 +32,7 @@ export default function AdminServicios() {
     setLoading(true)
     const [{ data: servs }, { data: cats }] = await Promise.all([
       supabase.from('servicios').select('*, categoria:categorias(id,nombre)').order('orden', { ascending: true }),
-      supabase.from('categorias').select('id, nombre').order('orden', { ascending: true }),
+      supabase.from('categorias').select('id, nombre, slug').order('orden', { ascending: true }),
     ])
     setRows(servs || [])
     setCategorias(cats || [])
@@ -42,7 +42,7 @@ export default function AdminServicios() {
   useEffect(() => { load() }, [])
 
   const openCreate = () => {
-    setForm({ ...emptyForm, orden: (rows[rows.length - 1]?.orden || 0) + 1, categoria_id: categorias[0]?.id || '' })
+    setForm({ ...emptyForm, orden: (rows[rows.length - 1]?.orden || 0) + 1, categoria_id: fixedCat?.id || categorias[0]?.id || '' })
     setErrors({}); setSlugTouched(false)
     setModal({ open: true, mode: 'create' })
   }
@@ -139,11 +139,17 @@ export default function AdminServicios() {
     load()
   }
 
+  const fixedCat = useMemo(
+    () => (fixedCategoriaSlug ? categorias.find((c) => c.slug === fixedCategoriaSlug) : null),
+    [categorias, fixedCategoriaSlug]
+  )
+
   const filtered = useMemo(() => rows.filter((r) => {
+    if (fixedCat && r.categoria_id !== fixedCat.id) return false
     if (filtroCat && r.categoria_id !== filtroCat) return false
     if (busqueda && !r.nombre.toLowerCase().includes(busqueda.toLowerCase())) return false
     return true
-  }), [rows, filtroCat, busqueda])
+  }), [rows, filtroCat, busqueda, fixedCat])
 
   const columns = [
     { key: 'thumb', label: '', render: (r) => <div className="thumb" style={{ backgroundImage: r.imagen_url ? `url(${r.imagen_url})` : 'none' }} /> },
@@ -187,16 +193,18 @@ export default function AdminServicios() {
 
       <div className="admin-card">
         <div className="admin-card__head">
-          <div className="admin-card__title">Servicios</div>
-          <button className="btn btn--primary btn--sm" onClick={openCreate}><Plus size={16} /> Nuevo servicio</button>
+          <div className="admin-card__title">{titulo}</div>
+          <button className="btn btn--primary btn--sm" onClick={openCreate}><Plus size={16} /> {ctaLabel}</button>
         </div>
 
         <div className="filters">
           <input className="form-input" placeholder="Buscar por nombre…" value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
-          <select className="form-select" value={filtroCat} onChange={(e) => setFiltroCat(e.target.value)}>
-            <option value="">Todas las categorías</option>
-            {categorias.map((c) => <option key={c.id} value={c.id}>{c.nombre}</option>)}
-          </select>
+          {!fixedCat && (
+            <select className="form-select" value={filtroCat} onChange={(e) => setFiltroCat(e.target.value)}>
+              <option value="">Todas las categorías</option>
+              {categorias.map((c) => <option key={c.id} value={c.id}>{c.nombre}</option>)}
+            </select>
+          )}
         </div>
 
         {loading ? <div className="state"><div className="spinner" /></div>
@@ -205,7 +213,7 @@ export default function AdminServicios() {
 
       <AdminModal
         open={modal.open}
-        title={modal.mode === 'edit' ? 'Editar servicio' : 'Nuevo servicio'}
+        title={modal.mode === 'edit' ? (fixedCat ? 'Editar promoción' : 'Editar servicio') : (fixedCat ? 'Nueva promoción' : 'Nuevo servicio')}
         onClose={() => setModal({ open: false })}
         footer={
           <>
@@ -215,13 +223,15 @@ export default function AdminServicios() {
         }
       >
         <form onSubmit={submit} className="form-grid">
-          <div className="form-group">
-            <label className="form-label">Categoría</label>
-            <select className="form-select" value={form.categoria_id || ''} onChange={(e) => setField('categoria_id', e.target.value)}>
-              <option value="">— Sin categoría —</option>
-              {categorias.map((c) => <option key={c.id} value={c.id}>{c.nombre}</option>)}
-            </select>
-          </div>
+          {!fixedCat && (
+            <div className="form-group">
+              <label className="form-label">Categoría</label>
+              <select className="form-select" value={form.categoria_id || ''} onChange={(e) => setField('categoria_id', e.target.value)}>
+                <option value="">— Sin categoría —</option>
+                {categorias.map((c) => <option key={c.id} value={c.id}>{c.nombre}</option>)}
+              </select>
+            </div>
+          )}
           <div className="form-group">
             <label className="form-label">Orden</label>
             <input className="form-input" type="number" value={form.orden} onChange={(e) => setField('orden', e.target.value)} />
