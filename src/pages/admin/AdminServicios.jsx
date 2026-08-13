@@ -174,7 +174,7 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
     { key: 'thumb', label: '', render: (r) => <div className="thumb" style={{ backgroundImage: r.imagen_url ? `url(${r.imagen_url})` : 'none' }} /> },
     { key: 'nombre', label: 'Servicio', render: (r) => (
       <>
-        <div style={{ fontWeight: 500 }}>{r.nombre} {r.destacado && <Star size={12} fill="var(--gold)" color="var(--gold)" style={{ marginLeft: 4 }} />}</div>
+        <div style={{ fontWeight: 500 }}>{r.nombre}</div>
         <div style={{ fontSize: '.8rem', color: 'var(--ink-soft)' }}>{r.categoria?.nombre || '—'}{r.grupo ? ` · ${r.grupo}` : ''}</div>
       </>
     )},
@@ -193,9 +193,6 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
       <>
         <button className="icon-btn" title="Subir" onClick={() => move(r, -1)}><ArrowUp size={16} /></button>
         <button className="icon-btn" title="Bajar" onClick={() => move(r, 1)}><ArrowDown size={16} /></button>
-        <button className="icon-btn" title={r.destacado ? 'Quitar destacado' : 'Destacar'} onClick={() => toggleDestacado(r)}>
-          <Star size={16} fill={r.destacado ? 'var(--gold)' : 'none'} color={r.destacado ? 'var(--gold)' : 'currentColor'} />
-        </button>
         <button className="icon-btn" title={r.activo ? 'Desactivar' : 'Activar'} onClick={() => toggleActivo(r)}>
           {r.activo ? <EyeOff size={16} /> : <Eye size={16} />}
         </button>
