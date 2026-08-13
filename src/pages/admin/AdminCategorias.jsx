@@ -118,7 +118,6 @@ export default function AdminCategorias() {
   }
 
   const columns = [
-    { key: 'thumb', label: '', render: (r) => <div className="thumb" style={{ backgroundImage: r.imagen_url ? `url(${r.imagen_url})` : 'none' }} /> },
     { key: 'nombre', label: 'Nombre', render: (r) => (
       <>
         <div style={{ fontWeight: 500 }}>{r.icono ? `${r.icono} ` : ''}{r.nombre}</div>
@@ -193,17 +192,6 @@ export default function AdminCategorias() {
             <label className="form-label">Descripción</label>
             <textarea className="form-textarea" value={form.descripcion || ''} onChange={(e) => setField('descripcion', e.target.value)} />
           </div>
-          <div className="form-group form-group--full">
-            <label className="form-label">Imagen URL o ruta</label>
-            <input className="form-input" placeholder="/manicura-clasica.jpg" value={form.imagen_url || ''} onChange={(e) => setField('imagen_url', e.target.value)} />
-            <span className="form-hint">Podés usar rutas de /public o URLs externas.</span>
-          </div>
-          {form.imagen_url && (
-            <div className="form-group form-group--full">
-              <label className="form-label">Vista previa</label>
-              <div className="form-preview" style={{ backgroundImage: `url(${form.imagen_url})` }} />
-            </div>
-          )}
           <div className="form-group form-group--full">
             <label className="form-check">
               <input type="checkbox" checked={form.activo} onChange={(e) => setField('activo', e.target.checked)} />
