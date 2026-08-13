@@ -69,6 +69,8 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
     const e = {}
     if (!form.nombre.trim()) e.nombre = 'El nombre es obligatorio'
     if (!form.slug.trim()) e.slug = 'El slug es obligatorio'
+    if (!form.categoria_id) e.categoria_id = 'La categoría es obligatoria'
+    if (!(form.imagen_url || '').trim()) e.imagen_url = 'La imagen es obligatoria'
     if (form.precio === '' || Number.isNaN(Number(form.precio))) e.precio = 'Precio numérico obligatorio'
     setErrors(e)
     return Object.keys(e).length === 0
@@ -225,11 +227,12 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
         <form onSubmit={submit} className="form-grid">
           {!fixedCat && (
             <div className="form-group">
-              <label className="form-label">Categoría</label>
+              <label className="form-label">Categoría *</label>
               <select className="form-select" value={form.categoria_id || ''} onChange={(e) => setField('categoria_id', e.target.value)}>
-                <option value="">— Sin categoría —</option>
+                <option value="">— Elegí una categoría —</option>
                 {categorias.map((c) => <option key={c.id} value={c.id}>{c.nombre}</option>)}
               </select>
+              {errors.categoria_id && <div className="form-error">{errors.categoria_id}</div>}
             </div>
           )}
           <div className="form-group">
@@ -269,8 +272,9 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
             <input className="form-input" type="number" value={form.precio_anterior ?? ''} onChange={(e) => setField('precio_anterior', e.target.value)} />
           </div>
           <div className="form-group">
-            <label className="form-label">Imagen URL o ruta</label>
+            <label className="form-label">Imagen URL o ruta *</label>
             <input className="form-input" placeholder="/manicura-clasica.jpg" value={form.imagen_url || ''} onChange={(e) => setField('imagen_url', e.target.value)} />
+            {errors.imagen_url && <div className="form-error">{errors.imagen_url}</div>}
           </div>
           {form.imagen_url && (
             <div className="form-group form-group--full">

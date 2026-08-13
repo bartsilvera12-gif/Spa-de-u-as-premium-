@@ -76,11 +76,14 @@ export async function getCatalogo() {
     if (cRes.error) throw cRes.error
     if (sRes.error) throw sRes.error
 
-    const areas = (cRes.data || []).filter((c) => c.icono) // solo áreas del catálogo nuevo
-    if (!areas.length) throw new Error('catálogo vacío')
-
     const byCat = {}
     for (const s of sRes.data || []) (byCat[s.categoria_id] ||= []).push(s)
+
+    // Se muestran todas las categorías activas que tengan servicios, excepto
+    // "promociones" (que alimenta su propia sección). El ícono es opcional:
+    // si no tiene, se usa uno por defecto.
+    const areas = (cRes.data || []).filter((c) => c.slug !== 'promociones' && (byCat[c.id] || []).length)
+    if (!areas.length) throw new Error('catálogo vacío')
 
     return areas.map((a) => {
       const list = (byCat[a.id] || []).slice().sort((x, y) => (x.orden || 0) - (y.orden || 0))
@@ -91,7 +94,7 @@ export async function getCatalogo() {
         if (!(key in idx)) { idx[key] = grupos.length; grupos.push({ titulo: s.grupo || undefined, servicios: [] }) }
         grupos[idx[key]].servicios.push({ nombre: s.nombre, img: s.imagen_url || null })
       }
-      return { id: a.slug, nombre: a.nombre, icono: a.icono, descripcion: a.descripcion, grupos }
+      return { id: a.slug, nombre: a.nombre, icono: a.icono || '✨', descripcion: a.descripcion, grupos }
     })
   }, fallbackCatalogo)
 }

@@ -53,6 +53,8 @@ export default function AdminCategorias() {
     const e = {}
     if (!form.nombre.trim()) e.nombre = 'El nombre es obligatorio'
     if (!form.slug.trim()) e.slug = 'El slug es obligatorio'
+    if (!(form.icono || '').trim()) e.icono = 'El ícono (emoji) es obligatorio'
+    if (!(form.descripcion || '').trim()) e.descripcion = 'La descripción es obligatoria'
     if (Number.isNaN(Number(form.orden))) e.orden = 'Debe ser numérico'
     setErrors(e)
     return Object.keys(e).length === 0
@@ -184,13 +186,15 @@ export default function AdminCategorias() {
             {errors.orden && <div className="form-error">{errors.orden}</div>}
           </div>
           <div className="form-group form-group--full">
-            <label className="form-label">Ícono (emoji)</label>
-            <input className="form-input" placeholder="Ej: ✨ (define si es un área del catálogo)" value={form.icono || ''} onChange={(e) => setField('icono', e.target.value)} />
-            <span className="form-hint">Las categorías con ícono aparecen como áreas en el carrusel del catálogo.</span>
+            <label className="form-label">Ícono (emoji) *</label>
+            <input className="form-input" placeholder="Ej: 💅 ✨ 🌿" value={form.icono || ''} onChange={(e) => setField('icono', e.target.value)} />
+            <span className="form-hint">El emoji que representa a la categoría en la web.</span>
+            {errors.icono && <div className="form-error">{errors.icono}</div>}
           </div>
           <div className="form-group form-group--full">
-            <label className="form-label">Descripción</label>
+            <label className="form-label">Descripción *</label>
             <textarea className="form-textarea" value={form.descripcion || ''} onChange={(e) => setField('descripcion', e.target.value)} />
+            {errors.descripcion && <div className="form-error">{errors.descripcion}</div>}
           </div>
           <div className="form-group form-group--full">
             <label className="form-check">
