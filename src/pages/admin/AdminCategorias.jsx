@@ -19,13 +19,31 @@ export default function AdminCategorias() {
   const [flash, setFlash] = useState('')
   const [err, setErr] = useState('')
   const [slugTouched, setSlugTouched] = useState(false)
+  const [servCount, setServCount] = useState({})
 
   const load = async () => {
     setLoading(true)
-    const { data, error } = await supabase.from('categorias').select('*').order('orden', { ascending: true })
+    const [{ data, error }, { data: servs }] = await Promise.all([
+      supabase.from('categorias').select('*').order('orden', { ascending: true }),
+      supabase.from('servicios').select('categoria_id'),
+    ])
     if (error) setErr(error.message)
     setRows(data || [])
+    const counts = {}
+    for (const s of servs || []) if (s.categoria_id) counts[s.categoria_id] = (counts[s.categoria_id] || 0) + 1
+    setServCount(counts)
     setLoading(false)
+  }
+
+  // No permite borrar una categoría que todavía tiene servicios.
+  const pedirBorrar = (row) => {
+    const n = servCount[row.id] || 0
+    if (n > 0) {
+      setErr(`No podés borrar "${row.nombre}": tiene ${n} servicio${n > 1 ? 's' : ''}. Primero movelos a otra categoría o borralos desde Servicios.`)
+      setTimeout(() => setErr(''), 6000)
+      return
+    }
+    setConfirmDel(row)
   }
 
   useEffect(() => { load() }, [])
@@ -138,7 +156,7 @@ export default function AdminCategorias() {
           {r.activo ? <EyeOff size={16} /> : <Eye size={16} />}
         </button>
         <button className="icon-btn" title="Editar" onClick={() => openEdit(r)}><Pencil size={16} /></button>
-        <button className="icon-btn icon-btn--danger" title="Eliminar" onClick={() => setConfirmDel(r)}><Trash2 size={16} /></button>
+        <button className="icon-btn icon-btn--danger" title="Eliminar" onClick={() => pedirBorrar(r)}><Trash2 size={16} /></button>
       </>
     )},
   ]
