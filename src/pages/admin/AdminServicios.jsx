@@ -248,10 +248,6 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
             <input className="form-input" type="number" value={form.orden} onChange={(e) => setField('orden', e.target.value)} />
           </div>
           <div className="form-group form-group--full">
-            <label className="form-label">Grupo / subgrupo</label>
-            <input className="form-input" placeholder="Ej: Limpiezas faciales (opcional)" value={form.grupo || ''} onChange={(e) => setField('grupo', e.target.value)} />
-          </div>
-          <div className="form-group form-group--full">
             <label className="form-label">Nombre *</label>
             <input className="form-input" value={form.nombre} onChange={(e) => setField('nombre', e.target.value)} />
             {errors.nombre && <div className="form-error">{errors.nombre}</div>}
