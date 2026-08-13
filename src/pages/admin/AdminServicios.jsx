@@ -317,12 +317,6 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
               </label>
             </div>
           )}
-          <div className="form-group">
-            <label className="form-check">
-              <input type="checkbox" checked={form.destacado} onChange={(e) => setField('destacado', e.target.checked)} />
-              Destacado
-            </label>
-          </div>
           <div className="form-group form-group--full">
             <label className="form-check">
               <input type="checkbox" checked={form.activo} onChange={(e) => setField('activo', e.target.checked)} />
