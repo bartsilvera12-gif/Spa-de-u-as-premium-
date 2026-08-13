@@ -9,6 +9,13 @@ import ConfirmDialog from '../../components/admin/ConfirmDialog.jsx'
 
 const emptyForm = { id: null, nombre: '', slug: '', descripcion: '', icono: '', imagen_url: '', orden: 0, activo: true }
 
+// Paleta de emojis para elegir con un clic (útil cuando no se pueden tipear desde la PC).
+const EMOJIS = [
+  '✨', '💅', '🦶', '💆‍♀️', '🧖‍♀️', '🧴', '🌿', '🌸', '🌷', '🌺', '🪷', '💐',
+  '💄', '💇‍♀️', '💈', '👁️', '🦋', '💉', '☀️', '🕯️', '👑', '⭐', '💖', '💎',
+  '🧂', '🍫', '💧', '🛁', '🌟', '🎀', '🫧', '🌹',
+]
+
 export default function AdminCategorias() {
   const [rows, setRows] = useState([])
   const [loading, setLoading] = useState(true)
@@ -213,8 +220,24 @@ export default function AdminCategorias() {
           </div>
           <div className="form-group form-group--full">
             <label className="form-label">Ícono (emoji) *</label>
-            <input className="form-input" placeholder="Ej: 💅 ✨ 🌿" value={form.icono || ''} onChange={(e) => setField('icono', e.target.value)} />
-            <span className="form-hint">El emoji que representa a la categoría en la web.</span>
+            <div className="emoji-field">
+              <span className="emoji-field__current" aria-hidden="true">{form.icono || '❓'}</span>
+              <input className="form-input" placeholder="Elegí uno abajo 👇" value={form.icono || ''} onChange={(e) => setField('icono', e.target.value)} />
+            </div>
+            <div className="emoji-picker">
+              {EMOJIS.map((em) => (
+                <button
+                  type="button"
+                  key={em}
+                  className={`emoji-picker__btn ${form.icono === em ? 'is-selected' : ''}`}
+                  onClick={() => setField('icono', em)}
+                  title={`Usar ${em}`}
+                >
+                  {em}
+                </button>
+              ))}
+            </div>
+            <span className="form-hint">Hacé clic en un emoji para elegirlo. Representa a la categoría en la web.</span>
             {errors.icono && <div className="form-error">{errors.icono}</div>}
           </div>
           <div className="form-group form-group--full">
