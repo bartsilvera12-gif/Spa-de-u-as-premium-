@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { Menu, X, Instagram } from 'lucide-react'
 import WhatsappIcon from './WhatsappIcon.jsx'
+import { useAjustes } from '../lib/ajustes.js'
 
 export default function PublicNavbar() {
+  const ajustes = useAjustes()
   const [open, setOpen] = useState(false)
   const [showLogo, setShowLogo] = useState(false)
   const close = () => setOpen(false)
@@ -46,7 +48,7 @@ export default function PublicNavbar() {
             <li><NavLink to="/galeria" onClick={close}>Galería</NavLink></li>
             <li>
               <a
-                href="https://wa.me/595982137690"
+                href={`https://wa.me/${ajustes.whatsapp}`}
                 target="_blank"
                 rel="noopener"
                 className="pub-navbar__cta"
@@ -56,18 +58,20 @@ export default function PublicNavbar() {
                 <span>Reservar</span>
               </a>
             </li>
-            <li>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener"
-                className="pub-navbar__cta pub-navbar__cta--alt"
-                onClick={close}
-              >
-                <Instagram size={18} strokeWidth={2} />
-                <span>Instagram</span>
-              </a>
-            </li>
+            {ajustes.instagram_url && (
+              <li>
+                <a
+                  href={ajustes.instagram_url}
+                  target="_blank"
+                  rel="noopener"
+                  className="pub-navbar__cta pub-navbar__cta--alt"
+                  onClick={close}
+                >
+                  <Instagram size={18} strokeWidth={2} />
+                  <span>Instagram</span>
+                </a>
+              </li>
+            )}
           </ul>
         </nav>
 

@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
-import { Instagram, MapPin } from 'lucide-react'
+import { Instagram, Facebook, Music2, Mail, MapPin } from 'lucide-react'
 import WhatsappIcon from './WhatsappIcon.jsx'
 import WhatsappFloat from './WhatsappFloat.jsx'
+import { useAjustes } from '../lib/ajustes.js'
 
 export default function PublicFooter() {
+  const ajustes = useAjustes()
   return (
     <footer className="pub-footer">
       <WhatsappFloat />
@@ -30,15 +32,34 @@ export default function PublicFooter() {
 
         <div className="pub-footer__col">
           <h4>Contacto</h4>
-          <a href="https://wa.me/595982137690" target="_blank" rel="noopener">
+          <a href={`https://wa.me/${ajustes.whatsapp}`} target="_blank" rel="noopener">
             <WhatsappIcon size={16} /> WhatsApp
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener">
-            <Instagram size={16} /> Instagram
-          </a>
-          <p className="pub-footer__loc">
-            <MapPin size={16} /> Asunción, Paraguay
-          </p>
+          {ajustes.instagram_url && (
+            <a href={ajustes.instagram_url} target="_blank" rel="noopener">
+              <Instagram size={16} /> Instagram
+            </a>
+          )}
+          {ajustes.facebook_url && (
+            <a href={ajustes.facebook_url} target="_blank" rel="noopener">
+              <Facebook size={16} /> Facebook
+            </a>
+          )}
+          {ajustes.tiktok_url && (
+            <a href={ajustes.tiktok_url} target="_blank" rel="noopener">
+              <Music2 size={16} /> TikTok
+            </a>
+          )}
+          {ajustes.email && (
+            <a href={`mailto:${ajustes.email}`}>
+              <Mail size={16} /> {ajustes.email}
+            </a>
+          )}
+          {ajustes.direccion && (
+            <p className="pub-footer__loc">
+              <MapPin size={16} /> {ajustes.direccion}
+            </p>
+          )}
         </div>
       </div>
       <div className="pub-footer__bottom">

@@ -10,6 +10,7 @@ import AdminDashboard from './pages/admin/AdminDashboard.jsx'
 import AdminCategorias from './pages/admin/AdminCategorias.jsx'
 import AdminServicios from './pages/admin/AdminServicios.jsx'
 import AdminPromociones from './pages/admin/AdminPromociones.jsx'
+import AdminAjustes from './pages/admin/AdminAjustes.jsx'
 import ProtectedAdminRoute from './routes/ProtectedAdminRoute.jsx'
 import ScrollToTop from './routes/ScrollToTop.jsx'
 
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="categorias" element={<AdminCategorias />} />
         <Route path="servicios" element={<AdminServicios />} />
         <Route path="promociones" element={<AdminPromociones />} />
+        <Route path="ajustes" element={<AdminAjustes />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />
