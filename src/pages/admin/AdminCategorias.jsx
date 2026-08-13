@@ -50,12 +50,12 @@ export default function AdminCategorias() {
 
   const openCreate = () => {
     setForm({ ...emptyForm, orden: (rows[rows.length - 1]?.orden || 0) + 1 })
-    setErrors({}); setSlugTouched(false)
+    setErrors({}); setErr(''); setSlugTouched(false)
     setModal({ open: true, mode: 'create' })
   }
   const openEdit = (row) => {
     setForm({ ...row })
-    setErrors({}); setSlugTouched(true)
+    setErrors({}); setErr(''); setSlugTouched(true)
     setModal({ open: true, mode: 'edit' })
   }
 
@@ -80,7 +80,10 @@ export default function AdminCategorias() {
 
   const submit = async (e) => {
     e.preventDefault()
-    if (!validate()) return
+    if (!validate()) {
+      setErr('Faltan campos obligatorios (marcados con *). Revisá el formulario.')
+      return
+    }
     setErr('')
 
     const payload = {
@@ -187,6 +190,11 @@ export default function AdminCategorias() {
         }
       >
         <form onSubmit={submit} className="form-grid">
+          {err && (
+            <div className="form-group form-group--full">
+              <div className="flash-error" style={{ margin: 0 }}>{err}</div>
+            </div>
+          )}
           <div className="form-group form-group--full">
             <label className="form-label">Nombre *</label>
             <input className="form-input" value={form.nombre} onChange={(e) => setField('nombre', e.target.value)} />

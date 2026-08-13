@@ -43,7 +43,7 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
 
   const openCreate = () => {
     setForm({ ...emptyForm, orden: (rows[rows.length - 1]?.orden || 0) + 1, categoria_id: fixedCat?.id || categorias[0]?.id || '' })
-    setErrors({}); setSlugTouched(false)
+    setErrors({}); setErr(''); setSlugTouched(false)
     setModal({ open: true, mode: 'create' })
   }
   const openEdit = (row) => {
@@ -53,7 +53,7 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
       precio_anterior: row.precio_anterior || '',
       duracion_min: row.duracion_min || '',
     })
-    setErrors({}); setSlugTouched(true)
+    setErrors({}); setErr(''); setSlugTouched(true)
     setModal({ open: true, mode: 'edit' })
   }
 
@@ -78,7 +78,10 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
 
   const submit = async (e) => {
     e.preventDefault()
-    if (!validate()) return
+    if (!validate()) {
+      setErr('Faltan campos obligatorios (marcados con *). Revisá el formulario.')
+      return
+    }
     setErr('')
 
     const payload = {
@@ -225,6 +228,11 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
         }
       >
         <form onSubmit={submit} className="form-grid">
+          {err && (
+            <div className="form-group form-group--full">
+              <div className="flash-error" style={{ margin: 0 }}>{err}</div>
+            </div>
+          )}
           {!fixedCat && (
             <div className="form-group">
               <label className="form-label">Categoría *</label>
