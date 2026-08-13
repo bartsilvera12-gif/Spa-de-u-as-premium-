@@ -27,7 +27,7 @@ export default function AdminAjustes() {
       return
     }
     invalidateCache()
-    setFlash('Ajustes guardados correctamente')
+    setFlash('Cambios guardados')
     setTimeout(() => setFlash(''), 3000)
   }
 
@@ -35,7 +35,6 @@ export default function AdminAjustes() {
 
   return (
     <>
-      {flash && <div className="flash-success">{flash}</div>}
       {err && <div className="flash-error">{err}</div>}
 
       <div className="admin-card">
@@ -70,9 +69,10 @@ export default function AdminAjustes() {
             <label className="form-label">Dirección / ubicación</label>
             <input className="form-input" placeholder="Asunción, Paraguay" value={form.direccion || ''} onChange={(e) => setField('direccion', e.target.value)} />
           </div>
-          <div className="form-group form-group--full">
-            <button type="submit" className="btn btn--primary" disabled={saving}>
-              {saving ? 'Guardando…' : 'Guardar ajustes'}
+          <div className="form-group form-group--full" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 16 }}>
+            {flash && <span style={{ color: '#2e7d5b', fontSize: '.9rem', fontWeight: 600 }}>✓ {flash}</span>}
+            <button type="submit" className="btn btn--primary btn--sm" disabled={saving}>
+              {saving ? 'Guardando…' : 'Guardar cambios'}
             </button>
           </div>
         </form>
