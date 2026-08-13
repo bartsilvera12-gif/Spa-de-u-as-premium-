@@ -10,6 +10,7 @@ export default function AdminSidebar({ onLogout }) {
 
   return (
     <aside className="admin-sidebar">
+      <div className="admin-sidebar__inner">
       <div className="admin-sidebar__brand">
         <img className="admin-sidebar__logo" src="/logo.png" alt="Dálida Beauty & Spa" />
         <div className="admin-sidebar__brand-text">
@@ -41,6 +42,7 @@ export default function AdminSidebar({ onLogout }) {
         <button className="admin-sidebar__link" onClick={handleLogout} style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit' }}>
           <LogOut size={18} /> Cerrar sesión
         </button>
+      </div>
       </div>
     </aside>
   )
