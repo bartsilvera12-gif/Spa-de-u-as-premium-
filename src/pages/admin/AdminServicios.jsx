@@ -309,12 +309,14 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
               <div className="form-preview" style={{ backgroundImage: `url(${form.imagen_url})` }} />
             </div>
           )}
-          <div className="form-group">
-            <label className="form-check">
-              <input type="checkbox" checked={form.precio_desde} onChange={(e) => setField('precio_desde', e.target.checked)} />
-              Mostrar como "Desde"
-            </label>
-          </div>
+          {fixedCat && (
+            <div className="form-group">
+              <label className="form-check">
+                <input type="checkbox" checked={form.precio_desde} onChange={(e) => setField('precio_desde', e.target.checked)} />
+                Mostrar como "Desde"
+              </label>
+            </div>
+          )}
           <div className="form-group">
             <label className="form-check">
               <input type="checkbox" checked={form.destacado} onChange={(e) => setField('destacado', e.target.checked)} />
