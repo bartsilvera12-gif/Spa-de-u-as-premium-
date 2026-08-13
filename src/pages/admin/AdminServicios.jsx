@@ -3,6 +3,7 @@ import { Plus, Pencil, Trash2, ArrowUp, ArrowDown, Eye, EyeOff, Star } from 'luc
 import { supabase } from '../../lib/supabase.js'
 import { slugify, formatGs, formatDuracion } from '../../lib/format.js'
 import { invalidateCache } from '../../lib/services.js'
+import { fileToDataUrl } from '../../lib/image.js'
 import AdminTable from '../../components/admin/AdminTable.jsx'
 import AdminModal from '../../components/admin/AdminModal.jsx'
 import ConfirmDialog from '../../components/admin/ConfirmDialog.jsx'
@@ -24,9 +25,23 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
   const [flash, setFlash] = useState('')
   const [err, setErr] = useState('')
   const [slugTouched, setSlugTouched] = useState(false)
+  const [uploadingImg, setUploadingImg] = useState(false)
 
   const [filtroCat, setFiltroCat] = useState('')
   const [busqueda, setBusqueda] = useState('')
+
+  const handleFile = async (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setUploadingImg(true)
+    try {
+      const dataUrl = await fileToDataUrl(file, { maxSize: 1000, quality: 0.8 })
+      setField('imagen_url', dataUrl)
+    } catch {
+      setErr('No se pudo procesar la imagen. Probá con otra.')
+    }
+    setUploadingImg(false)
+  }
 
   const load = async () => {
     setLoading(true)
@@ -70,8 +85,7 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
     if (!form.nombre.trim()) e.nombre = 'El nombre es obligatorio'
     if (!form.slug.trim()) e.slug = 'El slug es obligatorio'
     if (!form.categoria_id) e.categoria_id = 'La categoría es obligatoria'
-    if (!(form.imagen_url || '').trim()) e.imagen_url = 'La imagen es obligatoria'
-    if (form.precio === '' || Number.isNaN(Number(form.precio))) e.precio = 'Precio numérico obligatorio'
+    if (form.precio !== '' && Number.isNaN(Number(form.precio))) e.precio = 'El precio debe ser numérico'
     setErrors(e)
     return Object.keys(e).length === 0
   }
@@ -267,7 +281,7 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
             <input className="form-input" type="number" value={form.duracion_min ?? ''} onChange={(e) => setField('duracion_min', e.target.value)} />
           </div>
           <div className="form-group">
-            <label className="form-label">Precio (Gs.) *</label>
+            <label className="form-label">Precio (Gs.)</label>
             <input className="form-input" type="number" value={form.precio} onChange={(e) => setField('precio', e.target.value)} />
             {errors.precio && <div className="form-error">{errors.precio}</div>}
           </div>
@@ -275,10 +289,19 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
             <label className="form-label">Precio anterior (Gs.)</label>
             <input className="form-input" type="number" value={form.precio_anterior ?? ''} onChange={(e) => setField('precio_anterior', e.target.value)} />
           </div>
-          <div className="form-group">
-            <label className="form-label">Imagen URL o ruta *</label>
-            <input className="form-input" placeholder="/manicura-clasica.jpg" value={form.imagen_url || ''} onChange={(e) => setField('imagen_url', e.target.value)} />
-            {errors.imagen_url && <div className="form-error">{errors.imagen_url}</div>}
+          <div className="form-group form-group--full">
+            <label className="form-label">Imagen (opcional)</label>
+            <input type="file" accept="image/*" className="form-input" onChange={handleFile} disabled={uploadingImg} />
+            <span className="form-hint">
+              {uploadingImg ? 'Procesando imagen…' : 'Subí una imagen desde tu dispositivo, o pegá una ruta/URL abajo.'}
+            </span>
+          </div>
+          <div className="form-group form-group--full">
+            <label className="form-label">…o ruta / URL de imagen</label>
+            <input className="form-input" placeholder="/manicura-clasica.jpg"
+              value={(form.imagen_url || '').startsWith('data:') ? '' : (form.imagen_url || '')}
+              onChange={(e) => setField('imagen_url', e.target.value)} />
+            {(form.imagen_url || '').startsWith('data:') && <span className="form-hint">✓ Imagen subida desde tu dispositivo</span>}
           </div>
           {form.imagen_url && (
             <div className="form-group form-group--full">
