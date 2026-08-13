@@ -4,6 +4,7 @@ import { supabase } from '../../lib/supabase.js'
 import { slugify, formatGs, formatDuracion } from '../../lib/format.js'
 import { invalidateCache } from '../../lib/services.js'
 import { fileToDataUrl } from '../../lib/image.js'
+import { smartMatch } from '../../lib/searchMatch.js'
 import AdminTable from '../../components/admin/AdminTable.jsx'
 import AdminModal from '../../components/admin/AdminModal.jsx'
 import ConfirmDialog from '../../components/admin/ConfirmDialog.jsx'
@@ -166,7 +167,7 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
   const filtered = useMemo(() => rows.filter((r) => {
     if (fixedCat && r.categoria_id !== fixedCat.id) return false
     if (filtroCat && r.categoria_id !== filtroCat) return false
-    if (busqueda && !r.nombre.toLowerCase().includes(busqueda.toLowerCase())) return false
+    if (busqueda && !smartMatch(busqueda, [r.nombre, r.categoria?.nombre, r.descripcion, r.slug, r.grupo])) return false
     return true
   }), [rows, filtroCat, busqueda, fixedCat])
 
@@ -214,7 +215,7 @@ export default function AdminServicios({ fixedCategoriaSlug = null, titulo = 'Se
         </div>
 
         <div className="filters">
-          <input className="form-input" placeholder="Buscar por nombre…" value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
+          <input className="form-input" placeholder="Buscar por nombre, categoría, descripción…" value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
           {!fixedCat && (
             <select className="form-select" value={filtroCat} onChange={(e) => setFiltroCat(e.target.value)}>
               <option value="">Todas las categorías</option>

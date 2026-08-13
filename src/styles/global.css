@@ -69,9 +69,10 @@ img { max-width: 100%; display: block; }
 .fcar__pimg,
 img[src^="/servicios/"],
 img[src^="/galeria/"] {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  filter: saturate(1.15) contrast(1.05);
+  /* auto = reescalado suave de alta calidad del navegador. crisp-edges hacía
+     nearest-neighbor y dejaba las fotos dentadas/pixeladas al achicarlas. */
+  image-rendering: auto;
+  filter: saturate(1.06);
 }
 
 a { color: var(--rose-deep); text-decoration: none; transition: opacity .2s; }
